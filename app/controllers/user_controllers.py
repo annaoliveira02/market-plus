@@ -1,8 +1,25 @@
 from flask import request, current_app, jsonify
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from secrets import token_urlsafe
+
+# código para criar um decorator de permissao
+# def only_role(role):
+#     def wrapper(fn):
+#         @wraps(fn)
+#         def decorator(*args, **kwargs):
+#             verify_jwt_in_request()
+#             claims = get_jwt()
+#             if role in claims["roles"]:
+#                 return fn(*args, **kwargs)
+#             else:
+#                 return jsonify(msg="Unauthorized for this user scope"), 403
+#         return decorator
+#     return wrapper
 
 
 def create_user():
         data = request.get_json()   
+        data['token'] = token_urlsafe(16)
         Users.validate(data)  
         user = Users(**data)
         current_app.db.session.add(user)
@@ -19,7 +36,15 @@ def create_user():
 
 
 def login_user():
-    ...
+    
+    data = request.json
+    user: User = User.query.filter_by(email=data["email"]).first()
+
+    if user.verify_password(data['password']):
+        token = create_access_token(user)
+        return {"msg": "usuário logado"}, 200
+
+    return {"msg": "Email ou senha inválidos"}, 401
 
 
 def get_user():
