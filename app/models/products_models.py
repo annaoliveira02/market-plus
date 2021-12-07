@@ -3,7 +3,7 @@ from app.configs.database import db
 from sqlalchemy import Column, String, Integer, Float, Binary, DateTime
 
 @dataclass
-class Users(db.Model):
+class Products(db.Model):
     id: int
     name: str
     category: str

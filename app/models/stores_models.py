@@ -3,7 +3,7 @@ from app.configs.database import db
 from sqlalchemy import Column, String, Integer, Binary
 
 @dataclass
-class Users(db.Model):
+class Stores(db.Model):
     id: int
     name: str
     city: str
@@ -12,7 +12,7 @@ class Users(db.Model):
     email: str
     password: str
 
-    __tablename__ = "users"
+    __tablename__ = "stores"
 
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False, unique=True)
