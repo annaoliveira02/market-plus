@@ -1,8 +1,8 @@
-"""teste 30
+"""num to trabalhando ainda
 
-Revision ID: a3023e2fc061
+Revision ID: 7845cef301ea
 Revises: 
-Create Date: 2021-12-07 16:06:35.608135
+Create Date: 2021-12-07 17:51:35.928825
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a3023e2fc061'
+revision = '7845cef301ea'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,8 +33,10 @@ def upgrade():
     sa.Column('address', sa.String(length=100), nullable=False),
     sa.Column('store_img', sa.String(), nullable=True),
     sa.Column('phone_number', sa.String(length=20), nullable=True),
+    sa.Column('cnpj', sa.String(length=14), nullable=False),
+    sa.Column('password_hash', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
+    sa.UniqueConstraint('cnpj')
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
