@@ -20,5 +20,5 @@ class Users(db.Model):
     state = Column(String(2), nullable=False)
     country = Column(String(6), nullable=False)
     email = Column(String(30), nullable=False, unique=True)
-    state = Column(String(20), nullable=False)
+    password = Column(String(20), nullable=False)
 

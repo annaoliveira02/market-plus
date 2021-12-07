@@ -1,5 +1,7 @@
 from flask import request, current_app, jsonify
 
+from app.models.stores_models import Stores
+
 
 def register_store():
         data = request.get_json()   
