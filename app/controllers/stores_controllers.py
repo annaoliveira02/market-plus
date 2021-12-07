@@ -1,6 +1,10 @@
 from flask import request, current_app, jsonify
-
+from flask_jwt_extended.utils import create_access_token
+from app.exceptions.exceptions import InvalidKeyError
 from app.models.stores_models import Stores
+from flask_jwt_extended import jwt_required
+
+
 
 
 def register_store():
@@ -16,6 +20,7 @@ def get_all():
         return {"msg": "Nenhum dado encontrado"}, 404
     return jsonify(result), 200
 
+@jwt_required()
 def delete_stores(id):
     current= Stores.query.get(id)
     if current== None: 
@@ -29,3 +34,15 @@ def get_stores_id(id):
     if current== None: 
         return{"message": "Categoria não encontrada"},404
     return jsonify(current) 
+
+def login_store():
+    try:
+        data = request.json
+        store = Stores.query.filter_by(cnpj=data["cnpj"]).first()
+        if not store:
+            raise InvalidKeyError
+        if store.validate_password(data['password']):
+            token = create_access_token(store)
+            return {"token": token}, 200
+    except InvalidKeyError:
+        return {"msg": "CNPJ ou senha inválidos"}, 401

@@ -1,8 +1,8 @@
-"""criacao
+"""num to trabalhando ainda
 
-Revision ID: f3ab4dbd18d5
+Revision ID: 7845cef301ea
 Revises: 
-Create Date: 2021-12-07 14:06:52.888727
+Create Date: 2021-12-07 17:51:35.928825
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f3ab4dbd18d5'
+revision = '7845cef301ea'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,8 +33,10 @@ def upgrade():
     sa.Column('address', sa.String(length=100), nullable=False),
     sa.Column('store_img', sa.String(), nullable=True),
     sa.Column('phone_number', sa.String(length=20), nullable=True),
+    sa.Column('cnpj', sa.String(length=14), nullable=False),
+    sa.Column('password_hash', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
+    sa.UniqueConstraint('cnpj')
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -43,7 +45,7 @@ def upgrade():
     sa.Column('state', sa.String(length=2), nullable=False),
     sa.Column('country', sa.String(length=6), nullable=False),
     sa.Column('email', sa.String(length=30), nullable=False),
-    sa.Column('password', sa.String(length=20), nullable=False),
+    sa.Column('password_hash', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('name')

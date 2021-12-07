@@ -6,8 +6,10 @@ from app.exceptions.exceptions import (
 )
 
 from app.models.products_models import Products
+from flask_jwt_extended import jwt_required
 
 
+@jwt_required()
 def register_products():
     try:
         data = request.get_json()
@@ -31,7 +33,7 @@ def get_all():
         return e.message, 404
     return jsonify(result), 200
 
-
+@jwt_required()
 def change_products(id):
     product = Products.query.filter(Products.id==id).one_or_none()
     try:
@@ -56,11 +58,7 @@ def change_products(id):
         return e.message, 404
 
     
-   
-    
-
-
-
+@jwt_required()
 def delete_products(id):
     current = Products.query.get(id)
     try:
