@@ -3,7 +3,7 @@ from app.configs.database import db
 from sqlalchemy import Column, String, Integer, ForeignKey
 
 @dataclass
-class Users(db.Model):
+class Sugestions(db.Model):
     id: int
     type: str
     message: str
