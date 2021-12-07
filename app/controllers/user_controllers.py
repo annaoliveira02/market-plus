@@ -21,19 +21,11 @@ from app.models.user_models import Users
 
 def create_user():
         data = request.get_json()   
-        data['token'] = token_urlsafe(16)
-        Users.validate(data)  
+        # data['token'] = token_urlsafe(16)
         user = Users(**data)
         current_app.db.session.add(user)
         current_app.db.session.commit()
-        return {            
-            "name":user.name,
-            "city": user.city,
-            "state": user.state,
-            "country": user.country,
-            "email":user.email,
-            "password":user.password,            
-    }, 201
+        return jsonify(user), 201
 
 
 

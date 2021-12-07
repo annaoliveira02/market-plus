@@ -4,17 +4,11 @@ from app.models.stores_models import Stores
 
 
 def register_store():
-        data = request.get_json()   
-        Stores.validate(data)  
-        stores = Stores(**data)
-        current_app.db.session.add(stores)
-        current_app.db.session.commit()
-        return {            
-            "name":stores.name,
-            "address": stores.address,
-            "store_img": stores.stores_img,
-            "phone_number": stores.phone_number
-        }, 201
+    data = request.get_json()   
+    stores = Stores(**data)
+    current_app.db.session.add(stores)
+    current_app.db.session.commit()
+    return jsonify(stores), 201
 
 def get_all():
     result= Stores.query.all()
