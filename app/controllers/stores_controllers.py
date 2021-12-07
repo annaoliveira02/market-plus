@@ -24,7 +24,7 @@ def get_all():
 def delete_stores(id):
     current= Stores.query.get(id)
     if current== None: 
-        return{"message": "Categoria não encontrada"},404
+        return{"message": "Loja não encontrada"},404
     current_app.db.session.delete(current)
     current_app.db.session.commit()
     return "", 204  
@@ -32,7 +32,7 @@ def delete_stores(id):
 def get_stores_id(id):
     current= Stores.query.get(id)
     if current== None: 
-        return{"message": "Categoria não encontrada"},404
+        return{"message": "Loja não encontrada"},404
     return jsonify(current) 
 
 def login_store():

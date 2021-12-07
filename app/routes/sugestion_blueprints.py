@@ -7,5 +7,5 @@ bp_sugestions = Blueprint('bp_sugestions', __name__)
 
 bp_sugestions.post("/sugestions")(register_sugestion)
 bp_sugestions.get("/sugestions")(get_all_sugestion)
-bp_sugestions.delete("/sugestions")(delete_sugestion)
+bp_sugestions.delete("/sugestions/<id>")(delete_sugestion)
 
