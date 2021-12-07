@@ -42,10 +42,7 @@ def delete_products(id):
         return{"message": "Categoria não encontrada"},404
     current_app.db.session.delete(current)
     current_app.db.session.commit()
-    return "", 204
-
-
-  
+    return "", 204  
 
 def get_by_id(id):
     current= Products.query.get(id)
