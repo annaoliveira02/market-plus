@@ -1,6 +1,6 @@
 from flask import request, current_app, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-from app.exceptions.exceptions import InvalidKeyError
+from app.exceptions.exceptions import InvalidKeyError, NotFoundError
 from app.models.user_models import Users
 
 
@@ -33,32 +33,34 @@ def get_user():
     return jsonify(result), 200
 
 
-def delete_users():
-    data = request.json
-
-    user = Users.query.filter(Users.id==data["id"]).first()
-
-    if user is None:
-        return {"msg": "usuário não encontrado"}, 404
-
-    current_app.db.session.delete(user)
+def delete_users(id):
+    current = Users.query.get(id)
+    if current== None: 
+        return{"message": "Categoria não encontrada"},404     
+    current_app.db.session.delete(current)
     current_app.db.session.commit()
-
     return "", 204
 
-def change_users():
-    data= request.json
-    
-    user= Users.query.filter(Users.id== data["id"]).first()
-
-    if user is None:
-        return {"message": "Cadastro não encontrado"}, 404
-
+def change_users(id):
+    user = Users.query.filter(Users.id==id).one_or_none()
+   
+    current= Users.query.get(id)
+    data = request.get_json()   
+          
 
     for key, value in data.items():
-        setattr(user, key, value)    
-    
+        setattr(user, key, value)
+
     current_app.db.session.add(user)
     current_app.db.session.commit()
 
-    return "", 204
+    return {
+        "id": user.id,
+        "name": user.name,
+        "city": user.city,
+        "state": user.state,
+        "country": user.country,
+        "email": user.email
+    }, 200
+    
+
