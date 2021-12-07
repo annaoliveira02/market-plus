@@ -32,21 +32,33 @@ def get_all():
     return jsonify(result), 200
 
 
-def change_products():
-    data = request.json
-    product = Products.query.filter(Products.id == data["id"]).first()
+def change_products(id):
+    product = Products.query.filter(Products.id==id).one_or_none()
     try:
-        Products.validate_id(product)
+        current= Products.query.get(id)
+        data = request.get_json()   
+        Products.validate_id(product)   
+
+        for key, value in data.items():
+            setattr(product, key, value)
+
+        current_app.db.session.add(product)
+        current_app.db.session.commit()
+
+        return {
+        "id": product.id,
+        "name": product.name,
+        "category": product.category,
+        "product_img": product.product_img,
+        "price": product.price
+        }, 200
     except NotFoundError as e:
         return e.message, 404
 
-    for key, value in data.items():
-        setattr(product, key, value)
+    
+   
+    
 
-    current_app.db.session.add(product)
-    current_app.db.session.commit()
-
-    return "", 204
 
 
 def delete_products(id):
