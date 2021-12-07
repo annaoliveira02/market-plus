@@ -1,5 +1,7 @@
 from flask import request, current_app, jsonify
 
+from app.models.products_models import Products
+
 
 def register_products():
     data = request.get_json()

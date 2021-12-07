@@ -2,6 +2,8 @@ from flask import request, current_app, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from secrets import token_urlsafe
 
+from app.models.user_models import Users
+
 # código para criar um decorator de permissao
 # def only_role(role):
 #     def wrapper(fn):
