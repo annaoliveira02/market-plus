@@ -4,18 +4,11 @@ from app.models.products_models import Products
 
 
 def register_products():
-        data = request.get_json()   
-        Products.validate(data)  
-        products = Products(**data)
-        current_app.db.session.add(products)
-        current_app.db.session.commit()
-        return {            
-            "name":products.name,
-            "category": products.email,
-            "product_img": products.products_img,
-            "price": products.price,
-            "expiration_data":products.expiration_date
-        }, 201
+    data = request.get_json() 
+    products = Products(**data)
+    current_app.db.session.add(products)
+    current_app.db.session.commit()
+    return jsonify(products), 201
 
 def get_all():
     result= Products.query.all()

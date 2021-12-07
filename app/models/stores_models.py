@@ -17,6 +17,6 @@ class Stores(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False, unique=True)
     address = Column(String(100), nullable=False)
-    store_img = Column(LargeBinary)
+    store_img = Column(String)
     phone_number = Column(String(20))
 
