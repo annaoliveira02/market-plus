@@ -1,28 +1,23 @@
 from flask import request, current_app, jsonify
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
+from app.models.sugestion_models import Sugestions
 
 @jwt_required()
 def register_sugestion():
-    session = current_app.db.session
-
-    data = request.get_json()
+    current= get_jwt_identity()
+    data = request.get_json()    
+    print(current['id'])
+    data['users_id'] = current['id']
     
+    # sugestion = Sugestions(**data)
 
-    result = User.query.filter_by(nome=user.name).first()
+    # current_app.db.session.add(sugestion)
+    # current_app.db.commit()
 
-    data['user_id'] = user.id
-
-    sugestion = Sugestion(**data)
+    return {"alguma": "coisinha"}, 201
 
     
-    sugestion.result.append(result)
-    session.add(sugestion)
-    session.commit()
-
-    return {            
-            "type":sugestion.type,
-            "category": sugestion.category            
-    }, 201
 
 def get_all_sugestion():
     result= Sugestion.query.all()

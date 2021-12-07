@@ -1,8 +1,8 @@
-"""num to trabalhando ainda
+"""criacao de tabelas
 
-Revision ID: 7845cef301ea
+Revision ID: cc8f723961f1
 Revises: 
-Create Date: 2021-12-07 17:51:35.928825
+Create Date: 2021-12-07 18:11:00.081761
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7845cef301ea'
+revision = 'cc8f723961f1'
 down_revision = None
 branch_labels = None
 depends_on = None
