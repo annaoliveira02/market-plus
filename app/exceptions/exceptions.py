@@ -11,4 +11,4 @@ class InvalidKeyError(Exception):
 
 
 class NotFoundError(Exception):
-    message = {"message": "Nenhum produto encontrada"}
+    message = {"error": "Nenhum produto encontrada"}
