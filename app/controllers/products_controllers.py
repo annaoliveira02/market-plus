@@ -1,8 +1,9 @@
 from flask import request, current_app, jsonify, json
-
 from app.models.products_models import Products
+from flask_jwt_extended import jwt_required
 
 
+@jwt_required()
 def register_products():
         data = request.get_json()   
         
@@ -17,7 +18,7 @@ def get_all():
         return {"msg": "Nenhum dado encontrado"}, 404
     return jsonify(result), 200
 
-
+@jwt_required()
 def change_products():
     data= request.json
     
@@ -35,7 +36,7 @@ def change_products():
 
     return "", 204
 
-
+@jwt_required()
 def delete_products(id):
     current= Products.query.get(id)
     if current== None: 

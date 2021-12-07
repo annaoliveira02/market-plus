@@ -12,3 +12,6 @@ class InvalidKeyError(Exception):
 
 class NotFoundError(Exception):
     ...
+
+class NotAcessibleError(Exception):
+    ...

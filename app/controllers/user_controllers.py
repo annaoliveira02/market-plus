@@ -1,44 +1,29 @@
 from flask import request, current_app, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-from secrets import token_urlsafe
-
+from app.exceptions.exceptions import InvalidKeyError
 from app.models.user_models import Users
-
-# código para criar um decorator de permissao
-# def only_role(role):
-#     def wrapper(fn):
-#         @wraps(fn)
-#         def decorator(*args, **kwargs):
-#             verify_jwt_in_request()
-#             claims = get_jwt()
-#             if role in claims["roles"]:
-#                 return fn(*args, **kwargs)
-#             else:
-#                 return jsonify(msg="Unauthorized for this user scope"), 403
-#         return decorator
-#     return wrapper
 
 
 def create_user():
-        data = request.get_json()   
-        # data['token'] = token_urlsafe(16)
-        user = Users(**data)
-        current_app.db.session.add(user)
-        current_app.db.session.commit()
-        return jsonify(user), 201
-
+    data = request.get_json()   
+    user = Users(**data)
+    current_app.db.session.add(user)
+    current_app.db.session.commit()
+    return jsonify(user), 201
 
 
 def login_user():
-    
-    data = request.json
-    user: User = User.query.filter_by(email=data["email"]).first()
+    try:
+        data = request.json
+        user = Users.query.filter_by(email=data["email"]).first()
+        if not user:
+            raise InvalidKeyError
+        if user.validate_password(data['password']):
+            token = create_access_token(user)
+            return {"token": token}, 200
+    except InvalidKeyError:
+        return {"msg": "Email ou senha inválidos"}, 401
 
-    if user.verify_password(data['password']):
-        token = create_access_token(user)
-        return {"msg": "usuário logado"}, 200
-
-    return {"msg": "Email ou senha inválidos"}, 401
 
 
 def get_user():

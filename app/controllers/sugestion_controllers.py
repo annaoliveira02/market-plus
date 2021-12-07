@@ -1,6 +1,7 @@
 from flask import request, current_app, jsonify
+from flask_jwt_extended import jwt_required
 
-
+@jwt_required()
 def register_sugestion():
     session = current_app.db.session
 
@@ -29,7 +30,7 @@ def get_all_sugestion():
         return {"msg": "Nenhum dado encontrado"}, 404
     return jsonify(result), 200
 
-
+@jwt_required()
 def delete_sugestion():
     data = request.json
 
