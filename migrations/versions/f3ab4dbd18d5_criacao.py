@@ -1,8 +1,8 @@
-"""agora vai
+"""criacao
 
-Revision ID: b20a1d848e1e
+Revision ID: f3ab4dbd18d5
 Revises: 
-Create Date: 2021-12-07 11:43:28.855777
+Create Date: 2021-12-07 14:06:52.888727
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b20a1d848e1e'
+revision = 'f3ab4dbd18d5'
 down_revision = None
 branch_labels = None
 depends_on = None
