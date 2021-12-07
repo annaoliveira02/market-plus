@@ -16,22 +16,16 @@ def get_all():
         return {"msg": "Nenhum dado encontrado"}, 404
     return jsonify(result), 200
 
-def delete_stores():
-    data = request.json
-
-    product = Stores.query.filter(Stores.id==data["id"]).first()
-
-    if product is None:
-        return {"msg": "Produto não encontrado"}, 404
-
-
-    current_app.db.session.delete(product)
+def delete_stores(id):
+    current= Stores.query.get(id)
+    if current== None: 
+        return{"message": "Categoria não encontrada"},404
+    current_app.db.session.delete(current)
     current_app.db.session.commit()
+    return "", 204  
 
-    return "", 204
-
-def get_stores_id():
-    result= Stores.query.filter(Stores.id== data["id"].first)
-    if len(result) == 0:
-        return {"msg": "Nenhum dado encontrado"}, 404
-    return jsonify(result), 200
+def get_stores_id(id):
+    current= Stores.query.get(id)
+    if current== None: 
+        return{"message": "Categoria não encontrada"},404
+    return jsonify(current) 
