@@ -1,17 +1,17 @@
 from flask import request, current_app, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from app.exceptions.exceptions import InvalidKeyError, InvalidTypeError, NotFoundError 
+from app.exceptions.exceptions import InvalidKeyError, InvalidTypeError
 from app.models.sugestion_models import Sugestions
-from app.models.user_models import Users
+
 
 @jwt_required()
 def register_sugestion():
-    current= get_jwt_identity()
+    current = get_jwt_identity()
     data = request.json
 
     try:
-        Sugestions.validate_post_args(data)  
-        data['users_id'] = current['id']
+        Sugestions.validate_post_args(data)
+        data["users_id"] = current["id"]
         sugestion = Sugestions(**data)
 
         current_app.db.session.add(sugestion)
@@ -31,6 +31,7 @@ def get_all_sugestion():
         return {"msg": "Nenhum dado encontrado"}, 404
     return jsonify(result), 200
 
+
 @jwt_required()
 def delete_sugestion(id):
     user = get_jwt_identity()
@@ -39,7 +40,7 @@ def delete_sugestion(id):
 
     if not sugestion:
         return {"message": "Sugestão não encontrada"}, 404
-    
+
     if sugestion not in user_sugestions:
         return {"alerta": "Você não tem permissão para apagar este comentário."}, 401
 

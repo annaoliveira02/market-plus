@@ -1,9 +1,13 @@
 from dataclasses import dataclass
 from app.configs.database import db
 from sqlalchemy import Column, String, Integer
-from app.exceptions.exceptions import NotAcessibleError, StoreAlreadyExistsError, StoreInvalidKeys
+from app.exceptions.exceptions import (
+    NotAcessibleError,
+    StoreAlreadyExistsError,
+    StoreInvalidKeys,
+)
 from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy.orm import validates
+from sqlalchemy.orm import backref, relationship, validates
 
 
 @dataclass
@@ -25,9 +29,13 @@ class Stores(db.Model):
     cnpj = Column(String(14), nullable=False, unique=True)
     password_hash = Column(String(255), nullable=False)
 
+    products = relationship(
+        "Products", secondary="products_store", backref=backref("stores")
+    )
+
     @property
     def password(self):
-        raise NotAcessibleError('Password is not accessible')
+        raise NotAcessibleError("Password is not accessible")
 
     @password.setter
     def password(self, password_to_hash):
@@ -38,7 +46,14 @@ class Stores(db.Model):
 
     @staticmethod
     def validate_keys(data):
-        allowed_keys = ["name", "address", "store_img", "phone_number", "cnpj", "password"]
+        allowed_keys = [
+            "name",
+            "address",
+            "store_img",
+            "phone_number",
+            "cnpj",
+            "password",
+        ]
         for key in data:
             if key not in allowed_keys:
                 raise StoreInvalidKeys
@@ -46,7 +61,7 @@ class Stores(db.Model):
     @validates("name", "adress", "store_img", "phone_number", "cnpj")
     def validates(self, key, value):
         if key == "name":
-            unique_key = Stores.query.filter(Stores.name==value).first()
+            unique_key = Stores.query.filter(Stores.name == value).first()
             if unique_key is not None:
                 raise StoreAlreadyExistsError
         return value
