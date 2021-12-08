@@ -24,7 +24,7 @@ def create_user():
 def login_user():
     try:
         data = request.json
-        Users.validade_login_args(data)
+        Users.validate_login_args(data)
         user = Users.query.filter_by(email=data["email"]).first()
         if not user:
             raise NotFoundError
@@ -84,7 +84,7 @@ def change_users():
     try:
         user = Users.query.get(current["id"])
         data = request.json  
-        Users.validade_patch_args(data)
+        Users.validate_patch_args(data)
 
         if not user:
             raise NotFoundError

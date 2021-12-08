@@ -58,7 +58,7 @@ class Users(db.Model):
                 raise InvalidKeyError
 
     @staticmethod
-    def validade_login_args(data):
+    def validate_login_args(data):
         requested_args = ["email", "password"]
 
         for item in requested_args:
@@ -74,7 +74,7 @@ class Users(db.Model):
                 raise InvalidKeyError
 
     @staticmethod
-    def validade_patch_args(data):
+    def validate_patch_args(data):
         requested_args = ["name","city", "state", "country", "email", "password"]
         
         for item in data.values():
