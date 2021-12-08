@@ -38,7 +38,7 @@ def login_user():
             token = create_access_token(user)
             return {"token": token}, 200
     except NotFoundError:
-        return {"alerta": "Usuário não encontrado"}, 401
+        return {"alerta": "Usuário não encontrado"}, 404
     except InvalidKeyError:
         return {"alerta": "Informações incorretas (e-mail e senha)."}, 400
     except InvalidTypeError:
@@ -48,7 +48,7 @@ def login_user():
 def get_user():
     result = Users.query.all()
     if len(result) == 0:
-        return {"msg": "Nenhum dado encontrado"}, 404
+        return {"alerta": "Nenhum dado encontrado"}, 404
     return (
         jsonify(
             [
@@ -90,7 +90,7 @@ def delete_users():
         current_app.db.session.commit()
         return "", 204
     except NotFoundError:
-        return {"message": "Usuário não encontrada"}, 404
+        return {"alerta": "Usuário não encontrada"}, 404
 
 
 @jwt_required()
@@ -120,7 +120,7 @@ def change_users():
         }, 200
 
     except NotFoundError:
-        return {"message": "Usuário não encontrada"}, 404
+        return {"alerta": "Usuário não encontrada"}, 404
     except InvalidTypeError:
         return {"alerta": "Informações inválidas (apenas texto)."}, 400
     except InvalidKeyError:

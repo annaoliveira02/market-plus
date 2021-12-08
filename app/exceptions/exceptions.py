@@ -1,5 +1,5 @@
 class ProductAlreadyExistsError(Exception):
-    message = {"error": "Produto já cadastrado!"}
+    message = {"alerta": "Produto já cadastrado!"}
 
 
 class EmailAlreadyExistsError(Exception):
@@ -15,7 +15,7 @@ class InvalidTypeError(Exception):
 
 
 class NotFoundError(Exception):
-    message = {"error": "Nenhum produto encontrada"}
+    message = {"alerta": "Nenhum produto encontrada"}
 
 
 class NotAcessibleError(Exception):
@@ -23,12 +23,12 @@ class NotAcessibleError(Exception):
 
 
 class StoreAlreadyExistsError(Exception):
-    message = {"error": "Loja já cadastrada!"}
+    message = {"alerta": "Loja já cadastrada!"}
 
 
 class StoreInvalidKeys(Exception):
     allowed_keys = ["name", "adress", "store_img", "phone_number", "cnpj", "password"]
-    message = {"error": f"As chaves permitidas são: {[key for key in allowed_keys]}"}
+    message = {"alerta": f"As chaves permitidas são: {[key for key in allowed_keys]}"}
 
 
 class UniqueUserError(Exception):

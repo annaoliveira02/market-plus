@@ -14,6 +14,6 @@ def init_app(app: Flask):
     from app.routes.sugestion_blueprints import bp_sugestions
 
     app.register_blueprint(bp_sugestions)
-    from app.routes.favorites_blueprints import bp_favorites
+    from app.routes.products_user_blueprints import bp_favorites
 
     app.register_blueprint(bp_favorites)
