@@ -28,7 +28,7 @@ def register_sugestion():
 def get_all_sugestion():
     result = Sugestions.query.all()
     if len(result) == 0:
-        return {"msg": "Nenhum dado encontrado"}, 404
+        return {"alerta": "Nenhum dado encontrado"}, 404
     return jsonify(result), 200
 
 
@@ -39,7 +39,7 @@ def delete_sugestion(id):
     sugestion = Sugestions.query.filter(Sugestions.id == id).first()
 
     if not sugestion:
-        return {"message": "Sugestão não encontrada"}, 404
+        return {"alerta": "Sugestão não encontrada"}, 404
 
     if sugestion not in user_sugestions:
         return {"alerta": "Você não tem permissão para apagar este comentário."}, 401

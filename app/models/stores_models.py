@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from app.configs.database import db
 from sqlalchemy import Column, String, Integer
 from app.exceptions.exceptions import (
+    InvalidKeyError,
+    InvalidTypeError,
     NotAcessibleError,
     StoreAlreadyExistsError,
     StoreInvalidKeys,
@@ -44,24 +46,42 @@ class Stores(db.Model):
     def validate_password(self, input_password):
         return check_password_hash(self.password_hash, input_password)
 
-    @staticmethod
-    def validate_keys(data):
-        allowed_keys = [
-            "name",
-            "address",
-            "store_img",
-            "phone_number",
-            "cnpj",
-            "password",
-        ]
-        for key in data:
-            if key not in allowed_keys:
-                raise StoreInvalidKeys
 
-    @validates("name", "adress", "store_img", "phone_number", "cnpj")
-    def validates(self, key, value):
-        if key == "name":
-            unique_key = Stores.query.filter(Stores.name == value).first()
-            if unique_key is not None:
-                raise StoreAlreadyExistsError
-        return value
+    @validates("cnpj")
+    def validates(self, key, cnpj):
+        unique_key = Stores.query.filter(Stores.cnpj == cnpj).first()
+        if unique_key is not None:
+            raise StoreAlreadyExistsError
+        return cnpj
+
+    @staticmethod
+    def validate_store_args(data):
+        requested_args = ["name", "address", "store_img", "phone_number", "cnpj", "password"]
+
+        for item in requested_args:
+            if item not in data.keys():
+                raise InvalidKeyError
+
+        for item in data.values():
+            if type(item) is not str:
+                raise InvalidTypeError
+
+        for item in data.keys():
+            if item not in requested_args:
+                raise InvalidKeyError
+
+    @staticmethod
+    def validate_login_store(data):
+        requested_args = ["cnpj", "password"]
+
+        for item in requested_args:
+            if item not in data.keys():
+                raise InvalidKeyError
+
+        for item in data.values():
+            if type(item) is not str:
+                raise InvalidTypeError
+
+        for item in data.keys():
+            if item not in requested_args:
+                raise InvalidKeyError

@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.controllers.favorites_controllers import (
+from app.controllers.products_users_controllers import (
     add_to_favorites,
     remove_from_favorites,
 )

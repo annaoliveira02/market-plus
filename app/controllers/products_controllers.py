@@ -30,17 +30,17 @@ def register_products():
         products_store = ProductsStoreModel(**data2)
     except ProductAlreadyExistsError as e:
         return e.message, 409
-    except TypeError:
-        return {
-            "error": "Chave inválida! Deve conter somente as chaves: `name`, `category`, `procut_img` e `price`."
-        }, 409
+    # except TypeError:
+    #     return {
+    #         "alert": "Chave inválida! Deve conter somente as chaves: 'name', 'category', 'product_img' e 'price'."
+    #     }, 409
     except InvalidKeyError:
         return {
-            "error": "Chave inválida! Deve conter somente as chaves: `name`, `category`, `procut_img` e `price`."
+            "alert": "Chave inválida! Deve conter somente as chaves: 'name', 'category', 'product_img' e 'price'."
         }, 409
     except InvalidTypeError:
         return {
-            "error": "`name`, `category`, `procut_img` devem ser do tipo `str` e `price` deve ser do tipo `float`"
+            "alert": "'name', 'category', 'product_img' devem ser do tipo 'str' e 'price' deve ser do tipo 'float'"
         }, 409
 
     current_app.db.session.add(products_store)
@@ -85,12 +85,16 @@ def change_products(id):
     product = Products.query.filter(Products.id == id).one_or_none()
     try:
         data = request.get_json()
+        ProductsStoreModel.validate_patch_args(data)
         Products.validate_id(product)
+        current_store = get_jwt_identity()
+        relation = ProductsStoreModel.query.filter_by(product_id = id, store_id=current_store['id']).first()
+        if not relation:
+            raise NotFoundError
 
-        for key, value in data.items():
-            setattr(product, key, value)
+        setattr(relation, 'price_by_store', data['price'])
 
-        current_app.db.session.add(product)
+        current_app.db.session.add(relation)
         current_app.db.session.commit()
 
         return {
@@ -98,10 +102,18 @@ def change_products(id):
             "name": product.name,
             "category": product.category,
             "product_img": product.product_img,
-            "price": product.price,
+            "price": relation.price_by_store,
         }, 200
     except NotFoundError as e:
         return e.message, 404
+    except InvalidKeyError:
+        return {
+            "alerta": "Campos obrigatórios: Preço."
+        }, 400
+    except InvalidTypeError:
+        return {"alerta": "Preço deve ser em formato float."}, 400
+
+
 
 
 @jwt_required()
