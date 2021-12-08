@@ -24,3 +24,6 @@ class StoreAlreadyExistsError(Exception):
 class StoreInvalidKeys(Exception):
     allowed_keys = ["name", "adress", "store_img", "phone_number", "cnpj", "password"]
     message = {"error": f"As chaves permitidas são: {[key for key in allowed_keys]}"}
+
+class UniqueUserError(Exception):
+    ...
