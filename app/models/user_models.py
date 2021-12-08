@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+
+from sqlalchemy.orm import backref, relationship
 from app.configs.database import db
 from sqlalchemy import Column, String, Integer
 from app.exceptions.exceptions import NotAcessibleError
@@ -16,12 +18,16 @@ class Users(db.Model):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(100), nullable=False, unique=True)
+    name = Column(String(100), nullable=False)
     city = Column(String(100), nullable=False)
     state = Column(String(2), nullable=False)
     country = Column(String(6), nullable=False, default="Brasil")
     email = Column(String(30), nullable=False, unique=True)
     password_hash = Column(String(255), nullable=False)
+
+    sugestions = relationship("Sugestions", backref="user", uselist=True)
+
+    favorite_products = relationship("Products", secondary="products_users", backref=backref("users"))
 
     @property
     def password(self):

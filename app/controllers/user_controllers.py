@@ -1,6 +1,7 @@
 from flask import request, current_app, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from app.exceptions.exceptions import InvalidKeyError, NotFoundError
+from app.models.products_user_models import ProductsUserModel
 from app.models.user_models import Users
 
 
@@ -25,12 +26,31 @@ def login_user():
         return {"msg": "Email ou senha inválidos"}, 401
 
 
-
 def get_user():
-    result= Users.query.all()
+    result=Users.query.all()
     if len(result) == 0:
         return {"msg": "Nenhum dado encontrado"}, 404
-    return jsonify(result), 200
+    return jsonify([
+        {
+            "id": user.id,
+            "name": user.name,
+            "city": user.city,
+            "state": user.state,
+            "country": user.country,
+            "email": user.email,
+            "sugestions": [
+                {
+                    "type": sugestion.type,
+                    "message": sugestion.message
+                } for sugestion in user.sugestions
+            ],
+            "favorite_products": [
+                {"name": product.name,
+                "category": product.category,
+                "product_img": product.product_img} for product in user.favorite_products
+            ]
+        } for user in result
+    ]), 200
 
 
 def delete_users(id):
@@ -62,5 +82,3 @@ def change_users(id):
         "country": user.country,
         "email": user.email
     }, 200
-    
-
