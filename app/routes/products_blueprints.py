@@ -5,8 +5,6 @@ bp_products = Blueprint('bp_products', __name__)
 
 bp_products.get("/products")(get_all)
 bp_products.post("/products")(register_products)
-
-
 bp_products.get("/products/<id>")(get_by_id)
 bp_products.patch("/products/<id>")(change_products)
 bp_products.delete("/products/<id>")(delete_products)

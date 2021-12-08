@@ -1,8 +1,8 @@
-"""criacao de tabelas
+"""atualizaçao de branch
 
-Revision ID: cc8f723961f1
+Revision ID: 0e5ff2446359
 Revises: 
-Create Date: 2021-12-07 18:11:00.081761
+Create Date: 2021-12-08 11:41:11.006569
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'cc8f723961f1'
+revision = '0e5ff2446359'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -47,8 +47,7 @@ def upgrade():
     sa.Column('email', sa.String(length=30), nullable=False),
     sa.Column('password_hash', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('name')
+    sa.UniqueConstraint('email')
     )
     op.create_table('sugestions',
     sa.Column('id', sa.Integer(), nullable=False),
