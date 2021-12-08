@@ -9,6 +9,8 @@ class EmailAlreadyExistsError(Exception):
 class InvalidKeyError(Exception):
     ...
 
+class InvalidTypeError(Exception):
+    ...
 
 class NotFoundError(Exception):
     message = {"error": "Nenhum produto encontrada"}

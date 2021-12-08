@@ -1,29 +1,42 @@
 from flask import request, current_app, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-from app.exceptions.exceptions import InvalidKeyError, NotFoundError
+from app.exceptions.exceptions import InvalidKeyError, InvalidTypeError, NotFoundError, UniqueUserError
 from app.models.products_user_models import ProductsUserModel
 from app.models.user_models import Users
 
 
 def create_user():
-    data = request.get_json()   
-    user = Users(**data)
-    current_app.db.session.add(user)
-    current_app.db.session.commit()
-    return jsonify(user), 201
+    try:
+        data = request.get_json()
+        Users.validate_register_args(data)   
+        user = Users(**data)
+        current_app.db.session.add(user)
+        current_app.db.session.commit()
+        return jsonify(user), 201
+    except UniqueUserError:
+        return {"alerta": "E-mail já cadastrado."}, 409
+    except InvalidTypeError:
+        return {"alerta": "Informações inválidas (apenas texto)."}, 400
+    except InvalidKeyError:
+        return {"alerta": "Informações incorretas (nome, e-mail, cidade, estado, país e senha)."}, 400
 
 
 def login_user():
     try:
         data = request.json
+        Users.validade_login_args(data)
         user = Users.query.filter_by(email=data["email"]).first()
         if not user:
-            raise InvalidKeyError
+            raise NotFoundError
         if user.validate_password(data['password']):
             token = create_access_token(user)
             return {"token": token}, 200
+    except NotFoundError:
+        return {"alerta": "Usuário não encontrado"}, 401
     except InvalidKeyError:
-        return {"msg": "Email ou senha inválidos"}, 401
+        return {"alerta": "Informações incorretas (e-mail e senha)."}, 400
+    except InvalidTypeError:
+        return {"alerta": "Informações inválidas (apenas texto)."}, 400
 
 
 def get_user():
@@ -52,33 +65,48 @@ def get_user():
         } for user in result
     ]), 200
 
+@jwt_required()
+def delete_users():
+    current = get_jwt_identity()
+    try:
+        user = Users.query.get(current["id"])
+        if user== None: 
+            raise NotFoundError
+        current_app.db.session.delete(user)
+        current_app.db.session.commit()
+        return "", 204
+    except NotFoundError:
+        return{"message": "Usuário não encontrada"}, 404  
 
-def delete_users(id):
-    current = Users.query.get(id)
-    if current== None: 
-        return{"message": "Categoria não encontrada"},404     
-    current_app.db.session.delete(current)
-    current_app.db.session.commit()
-    return "", 204
+@jwt_required()
+def change_users():
+    current = get_jwt_identity()
+    try:
+        user = Users.query.get(current["id"])
+        data = request.json  
+        Users.validade_patch_args(data)
 
-def change_users(id):
-    user = Users.query.filter(Users.id==id).one_or_none()
-   
-    current= Users.query.get(id)
-    data = request.get_json()   
-          
+        if not user:
+            raise NotFoundError
 
-    for key, value in data.items():
-        setattr(user, key, value)
+        for key, value in data.items():
+            setattr(user, key, value)
 
-    current_app.db.session.add(user)
-    current_app.db.session.commit()
+        current_app.db.session.add(user)
+        current_app.db.session.commit()
 
-    return {
-        "id": user.id,
-        "name": user.name,
-        "city": user.city,
-        "state": user.state,
-        "country": user.country,
-        "email": user.email
-    }, 200
+        return {
+            "id": user.id,
+            "name": user.name,
+            "city": user.city,
+            "state": user.state,
+            "country": user.country,
+            "email": user.email
+        }, 200
+        
+    except NotFoundError:
+        return{"message": "Usuário não encontrada"}, 404
+    except InvalidTypeError:
+        return {"alerta": "Informações inválidas (apenas texto)."}, 400
+    except InvalidKeyError:
+        return {"alerta": "Informações incorretas (nome, e-mail, cidade, estado, país e/ou senha)."}, 400
