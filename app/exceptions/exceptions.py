@@ -18,5 +18,9 @@ class NotFoundError(Exception):
 class NotAcessibleError(Exception):
     ...
 
-class UniqueUserError(Exception):
-    ...
+class StoreAlreadyExistsError(Exception):
+    message = {"error": "Loja já cadastrada!"}
+
+class StoreInvalidKeys(Exception):
+    allowed_keys = ["name", "adress", "store_img", "phone_number", "cnpj", "password"]
+    message = {"error": f"As chaves permitidas são: {[key for key in allowed_keys]}"}

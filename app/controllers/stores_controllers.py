@@ -1,16 +1,21 @@
 from flask import request, current_app, jsonify
 from flask_jwt_extended.utils import create_access_token
-from app.exceptions.exceptions import InvalidKeyError
+from app.exceptions.exceptions import InvalidKeyError, StoreAlreadyExistsError, StoreInvalidKeys
 from app.models.stores_models import Stores
 from flask_jwt_extended import jwt_required
 
-
 def register_store():
-    data = request.get_json()   
-    stores = Stores(**data)
-    current_app.db.session.add(stores)
-    current_app.db.session.commit()
-    return jsonify(stores), 201
+    try:
+        data = request.get_json()
+        Stores.validate_keys(data)   
+        stores = Stores(**data)
+        current_app.db.session.add(stores)
+        current_app.db.session.commit()
+        return jsonify(stores), 201
+    except StoreAlreadyExistsError as e:
+        return e.message, 409
+    except StoreInvalidKeys as e:
+        return e.message, 400
 
 def get_all():
     result= Stores.query.all()
