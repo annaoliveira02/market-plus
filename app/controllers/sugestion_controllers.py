@@ -1,20 +1,28 @@
 from flask import request, current_app, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from app.exceptions.exceptions import InvalidKeyError, InvalidTypeError
 from app.models.sugestion_models import Sugestions
 
 
 @jwt_required()
 def register_sugestion():
     current = get_jwt_identity()
-    data = request.get_json()
-    data["users_id"] = current["id"]
+    data = request.json
 
-    sugestion = Sugestions(**data)
+    try:
+        Sugestions.validate_post_args(data)
+        data["users_id"] = current["id"]
+        sugestion = Sugestions(**data)
 
-    current_app.db.session.add(sugestion)
-    current_app.db.session.commit()
+        current_app.db.session.add(sugestion)
+        current_app.db.session.commit()
 
-    return jsonify(sugestion), 201
+        return jsonify(sugestion), 201
+
+    except InvalidKeyError:
+        return {"alerta": "Informações incorretas (tipo e mensagem)."}, 400
+    except InvalidTypeError:
+        return {"alerta": "Informações inválidas (apenas texto)."}, 400
 
 
 def get_all_sugestion():
@@ -26,9 +34,16 @@ def get_all_sugestion():
 
 @jwt_required()
 def delete_sugestion(id):
-    current = Sugestions.query.get(id)
-    if current is None:
-        return {"message": "Sugestões não encontrada"}, 404
-    current_app.db.session.delete(current)
+    user = get_jwt_identity()
+    user_sugestions = Sugestions.query.filter(Sugestions.users_id == user["id"]).all()
+    sugestion = Sugestions.query.filter(Sugestions.id == id).first()
+
+    if not sugestion:
+        return {"message": "Sugestão não encontrada"}, 404
+
+    if sugestion not in user_sugestions:
+        return {"alerta": "Você não tem permissão para apagar este comentário."}, 401
+
+    current_app.db.session.delete(sugestion)
     current_app.db.session.commit()
     return "", 204
