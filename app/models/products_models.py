@@ -1,12 +1,11 @@
 from dataclasses import dataclass
-from sqlalchemy.sql.sqltypes import LargeBinary
 from app.configs.database import db
-from sqlalchemy import Column, String, Integer, Float, DateTime
+from sqlalchemy import Column, String, Integer, Float
 from sqlalchemy.orm import validates
-import psycopg2
 
 from app.exceptions.exceptions import (
     InvalidKeyError,
+    InvalidTypeError,
     NotFoundError,
     ProductAlreadyExistsError,
 )
@@ -42,3 +41,19 @@ class Products(db.Model):
             raise NotFoundError
         if type(current) != Products and len(current) == 0:
             raise NotFoundError
+
+    def validate_keys(data):
+        for item in Products.allowed_keys:
+            if item not in data.keys():
+                raise InvalidKeyError
+
+        for item in data.keys():
+            if item not in Products.allowed_keys:
+                raise InvalidKeyError
+        if (
+            type(data["name"]) is not str
+            or type(data["product_img"]) is not str
+            or type(data["category"]) is not str
+            or type(data["price"]) is not float
+        ):
+            raise InvalidTypeError

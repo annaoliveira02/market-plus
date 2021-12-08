@@ -3,9 +3,15 @@ from sqlalchemy.orm import backref, relationship
 from app.configs.database import db
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import validates
-from app.exceptions.exceptions import InvalidKeyError, InvalidTypeError, NotAcessibleError, UniqueUserError
+from app.exceptions.exceptions import (
+    InvalidKeyError,
+    InvalidTypeError,
+    NotAcessibleError,
+    UniqueUserError,
+)
 from werkzeug.security import generate_password_hash, check_password_hash
- 
+
+
 @dataclass
 class Users(db.Model):
     id: int
@@ -27,67 +33,64 @@ class Users(db.Model):
 
     sugestions = relationship("Sugestions", backref="user", uselist=True)
 
-    favorite_products = relationship("Products", secondary="products_users", backref=backref("users"))
+    favorite_products = relationship(
+        "Products", secondary="products_users", backref=backref("users")
+    )
 
-    @validates('email')
+    @validates("email")
     def validate(self, key, email):
-      unique_key = (
-              Users
-              .query
-              .filter(Users.email==email)
-              .one_or_none()
-          )
-      if unique_key is not None:
-        raise UniqueUserError
-      return email
+        unique_key = Users.query.filter(Users.email == email).one_or_none()
+        if unique_key is not None:
+            raise UniqueUserError
+        return email
 
     @staticmethod
     def validate_register_args(data):
-        requested_args = ["name","city", "state", "country", "email", "password"]
+        requested_args = ["name", "city", "state", "country", "email", "password"]
 
         for item in requested_args:
             if item not in data.keys():
                 raise InvalidKeyError
-        
+
         for item in data.values():
             if type(item) is not str:
                 raise InvalidTypeError
-            
+
         for item in data.keys():
             if item not in requested_args:
                 raise InvalidKeyError
 
     @staticmethod
-    def validade_login_args(data):
+    def validate_login_args(data):
         requested_args = ["email", "password"]
 
         for item in requested_args:
             if item not in data.keys():
                 raise InvalidKeyError
-        
+
         for item in data.values():
             if type(item) is not str:
                 raise InvalidTypeError
-            
+
         for item in data.keys():
             if item not in requested_args:
                 raise InvalidKeyError
 
     @staticmethod
-    def validade_patch_args(data):
-        requested_args = ["name","city", "state", "country", "email", "password"]
-        
+    def validate_patch_args(data):
+        requested_args = ["name", "city", "state", "country", "email", "password"]
+
         for item in data.values():
             if type(item) is not str:
                 raise InvalidTypeError
-            
+
         for item in data.keys():
             if item not in requested_args:
                 raise InvalidKeyError
 
     @property
     def password(self):
-        raise NotAcessibleError('Password is not accessible')
+        raise NotAcessibleError("Password is not accessible")
 
     @password.setter
     def password(self, password_to_hash):

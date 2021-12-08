@@ -1,7 +1,13 @@
 from flask import Blueprint
-from app.controllers.products_controllers import get_all, register_products, change_products, delete_products, get_by_id
+from app.controllers.products_controllers import (
+    get_all,
+    register_products,
+    change_products,
+    delete_products,
+    get_by_id,
+)
 
-bp_products = Blueprint('bp_products', __name__)
+bp_products = Blueprint("bp_products", __name__)
 
 bp_products.get("/products")(get_all)
 bp_products.post("/products")(register_products)
