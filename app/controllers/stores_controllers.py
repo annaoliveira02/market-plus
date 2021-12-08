@@ -5,8 +5,6 @@ from app.models.stores_models import Stores
 from flask_jwt_extended import jwt_required
 
 
-
-
 def register_store():
     data = request.get_json()   
     stores = Stores(**data)
