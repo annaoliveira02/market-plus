@@ -17,3 +17,6 @@ def init_app(app: Flask):
     from app.routes.products_user_blueprints import bp_favorites
 
     app.register_blueprint(bp_favorites)
+    from app.routes.img_blueprints import bp_img
+
+    app.register_blueprint(bp_img)
