@@ -15,3 +15,4 @@ def init_app(app: Flask):
     from app.models.sugestion_models import Sugestions
     from app.models.products_user_models import ProductsUserModel
     from app.models.products_store_models import ProductsStoreModel
+    from app.models.img_models import Img
