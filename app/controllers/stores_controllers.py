@@ -47,7 +47,7 @@ def get_all():
                         {
                             "name": product.name,
                             "category": product.category,
-                            "product_img": product.product_img,
+                            # "product_img": product.product_img,
                         }
                         for product in store.products
                     ],
