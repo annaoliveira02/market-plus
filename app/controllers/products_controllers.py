@@ -8,7 +8,6 @@ from app.exceptions.exceptions import (
 )
 from app.models.products_models import Products
 from flask_jwt_extended import jwt_required
-
 from app.models.products_store_models import ProductsStoreModel
 
 
@@ -36,11 +35,11 @@ def register_products():
     #     }, 409
     except InvalidKeyError:
         return {
-            "alert": "Chave inválida! Deve conter somente as chaves: 'name', 'category', 'product_img' e 'price'."
+            "alert": "Chave inválida! Deve conter somente as chaves: 'name', 'category' e 'price'."
         }, 409
     except InvalidTypeError:
         return {
-            "alert": "'name', 'category', 'product_img' devem ser do tipo 'str' e 'price' deve ser do tipo 'float'"
+            "alert": "'name', 'category', devem ser do tipo 'str' e 'price' deve ser do tipo 'float'"
         }, 409
 
     current_app.db.session.add(products_store)
@@ -61,7 +60,6 @@ def get_all():
                     "id": product.id,
                     "name": product.name,
                     "category": product.category,
-                    "product_img": product.product_img,
                     "price": product.price,
                     "stores": [
                         {
@@ -101,7 +99,6 @@ def change_products(id):
             "id": product.id,
             "name": product.name,
             "category": product.category,
-            "product_img": product.product_img,
             "price": relation.price_by_store,
         }, 200
     except NotFoundError as e:
