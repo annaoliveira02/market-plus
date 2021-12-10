@@ -67,7 +67,7 @@ def get_user():
                         {
                             "name": product.name,
                             "category": product.category,
-                            "product_img": product.product_img,
+                            "price": product.price,
                         }
                         for product in user.favorite_products
                     ],
