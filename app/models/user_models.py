@@ -27,7 +27,7 @@ class Users(db.Model):
     name = Column(String(100), nullable=False)
     city = Column(String(100), nullable=False)
     state = Column(String(2), nullable=False)
-    country = Column(String(6), nullable=False, default="Brasil")
+    country = Column(String(6), default="Brasil")
     email = Column(String(30), nullable=False, unique=True)
     password_hash = Column(String(255), nullable=False)
 
