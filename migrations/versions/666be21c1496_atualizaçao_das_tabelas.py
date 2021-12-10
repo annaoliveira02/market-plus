@@ -1,8 +1,8 @@
 """atualizaçao das tabelas
 
-Revision ID: 5467ff026748
+Revision ID: 666be21c1496
 Revises: 
-Create Date: 2021-12-10 11:25:19.899970
+Create Date: 2021-12-10 12:04:29.280607
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5467ff026748'
+revision = '666be21c1496'
 down_revision = None
 branch_labels = None
 depends_on = None
