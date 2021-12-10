@@ -21,9 +21,8 @@ class ProductsStoreModel(db.Model):
 
     @staticmethod
     def validate_patch_args(data):
-        print(data.keys(), data.values())
         if 'price' not in data.keys() or len(data.keys()) > 1:
             raise InvalidKeyError
 
-        if type(data.values()) is not float:
+        if type(data["price"]) is not float:
             raise InvalidTypeError
