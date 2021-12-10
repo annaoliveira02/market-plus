@@ -23,7 +23,7 @@ def create_user():
         return {"alerta": "Informações inválidas (apenas texto)."}, 400
     except InvalidKeyError:
         return {
-            "alerta": "Informações incorretas (nome, e-mail, cidade, estado, país e senha)."
+            "alerta": "Informações incorretas (nome, e-mail, cidade, estado e senha)."
         }, 400
 
 

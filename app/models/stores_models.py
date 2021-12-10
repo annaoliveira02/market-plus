@@ -17,7 +17,9 @@ class Stores(db.Model):
     id: int
     name: str
     address: str
-    store_img: str
+    city: str
+    state: str
+
     phone_number: str
     cnpj: str
 
@@ -26,7 +28,8 @@ class Stores(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
     address = Column(String(100), nullable=False)
-    store_img = Column(String)
+    city = Column(String(100), nullable=False)
+    state = Column(String(20), nullable=False)
     phone_number = Column(String(20))
     cnpj = Column(String(14), nullable=False, unique=True)
     password_hash = Column(String(255), nullable=False)
@@ -56,7 +59,7 @@ class Stores(db.Model):
 
     @staticmethod
     def validate_store_args(data):
-        requested_args = ["name", "address", "store_img", "phone_number", "cnpj", "password"]
+        requested_args = ["name", "address", "city", "state", "phone_number", "cnpj", "password"]
 
         for item in requested_args:
             if item not in data.keys():

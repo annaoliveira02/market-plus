@@ -46,7 +46,7 @@ class Users(db.Model):
 
     @staticmethod
     def validate_register_args(data):
-        requested_args = ["name", "city", "state", "country", "email", "password"]
+        requested_args = ["name", "city", "state", "email", "password"]
 
         for item in requested_args:
             if item not in data.keys():
