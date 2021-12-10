@@ -40,7 +40,8 @@ def get_all():
                     "id": store.id,
                     "name": store.name,
                     "address": store.address,
-                    "store_img": store.store_img,
+                    "city": store.city,
+                    "state": store.state,
                     "phone_number": store.phone_number,
                     "cnpj": store.cnpj,
                     "products": [
