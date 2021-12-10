@@ -29,7 +29,6 @@ Requisições para a API devem seguir os padrões:
 	
 }
 
-
 ```
 Caso dê tudo certo, a resposta será assim:
 
@@ -46,7 +45,7 @@ Caso dê tudo certo, a resposta será assim:
 }
 ```
 
-
+<h3 align='center'> Login de usuário</h3>
 `POST /login_users - para login de usuários FORMATO DA REQUISIÇÃO `
 
 ```json
@@ -65,7 +64,7 @@ Caso dê tudo certo, a resposta será assim:
   "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYzOTA3NDY0MiwianRpIjoiNWExNTFhNjQtNmYzOS00YjU2LTgzZWQtNjQxM2QxN2JlZjhmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MiwibmFtZSI6ImdhYnJpZWxhIiwiY2l0eSI6ImFwdWNhcmFuYSIsInN0YXRlIjoiUFIiLCJjb3VudHJ5IjoiQnJhc2lsIiwiZW1haWwiOiJnYWJyaWVsYXNAZW1haWwuY29tIn0sIm5iZiI6MTYzOTA3NDY0MiwiZXhwIjoxNjM5MDc1NTQyfQ.SU8PBco6gZaLVtsOViDo4werwJHi3GcAkxxsbIZt3rk"
 }
 ```
-
+<h3 align='center'> Buscar usuários</h3>
 `GET /users -  FORMATO DA REQUISIÇÃO `
 
 Caso dê tudo certo, a resposta será assim:
@@ -86,16 +85,13 @@ Caso dê tudo certo, a resposta será assim:
   }
 ]
 ```
-
+<h3 align='center'> Editar usuário</h3>
 `PATCH /users/1 -  FORMATO DA REQUISIÇÃO `
 
 ```json
 {
-  "name": "Gabriela Rodrigues",
-  "city": "Apucarana",
-  "state": "PR",
-  "country": "Brasil",
-  "email": "gabriela@email.com"
+  "name": "Gabriela Rodrigues"
+  
 }
 ```
 
@@ -115,7 +111,7 @@ Caso dê tudo certo a resposta será assim:
 }
 ```
 
-
+<h3 align='center'> Deletar usuário</h3>
 `DELETE /users/1 -  FORMATO DA REQUISIÇÃO- 201`
 
 Caso dê tudo certo a resposta será assim:
@@ -123,4 +119,16 @@ Caso dê tudo certo a resposta será assim:
 `DELETE /users/1 - FORMATO DA RESPOSTA - 201`
 ""
 
+<h3 align='center'> Cadastro de produtos</h3>
+`POST /register - para cadastro de produtos FORMATO DA REQUISIÇÃO `
+
+```json
+{
+	"name": "Sabão em pó",
+	"category": "Limpeza",
+	"product_img": "image.png",
+	"price": 9.80
+}
+
+```
 
