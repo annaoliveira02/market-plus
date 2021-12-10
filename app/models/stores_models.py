@@ -19,7 +19,6 @@ class Stores(db.Model):
     address: str
     city: str
     state: str
-
     phone_number: str
     cnpj: str
 
