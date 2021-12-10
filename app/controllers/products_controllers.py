@@ -86,13 +86,13 @@ def change_products(id):
         ProductsStoreModel.validate_patch_args(data)
         Products.validate_id(product)
         current_store = get_jwt_identity()
-        relation = ProductsStoreModel.query.filter_by(product_id = id, store_id=current_store['id']).first()
-        if not relation:
+        # relation = ProductsStoreModel.query.filter_by(product_id = id, store_id=current_store['id']).first()
+        if not product:
             raise NotFoundError
 
-        setattr(relation, 'price_by_store', data['price'])
+        setattr(product, 'price_by_store', data['price'])
 
-        current_app.db.session.add(relation)
+        current_app.db.session.add(product)
         current_app.db.session.commit()
 
         return {
