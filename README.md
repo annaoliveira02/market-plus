@@ -76,7 +76,7 @@ Caso dê tudo certo, a resposta será assim:
   {
     "id": 1,
     "name": "kaio",
-    "city": "brasólia",
+    "city": "brasília",
     "state": "DF",
     "country": "Brasil",
     "email": "kaio@email.com",
@@ -200,7 +200,7 @@ Caso dê tudo certo, a resposta será assim:
 
 ```json
 {
- 
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYzOTA3NDY0MiwianRpIjoiNWExNTFhNjQtNmYzOS00YjU2LTgzZWQtNjQxM2QxN2JlZjhmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MiwibmFtZSI6ImdhYnJpZWxhIiwiY2l0eSI6ImFwdWNhcmFuYSIsInN0YXRlIjoiUFIiLCJjb3VudHJ5IjoiQnJhc2lsIiwiZW1haWwiOiJnYWJyaWVsYXNAZW1haWwuY29tIn0sIm5iZiI6MTYzOTA3NDY0MiwiZXhwIjoxNjM5MDc1NTQyfQ.SU8PBco6gZaLVtsOViDo4werwJHi3GcAkxxsbIZt3rk"
 }
 ```
 
