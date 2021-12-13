@@ -354,9 +354,10 @@ Caso dê tudo certo, a resposta será assim:
 
 ```json
 {
+  "id": 1,
 	"type": "produto de limpeza",
-	"message": "valor não está atualizado",
-  "id": 1
+	"message": "valor não está atualizado"
+  
 	
 }
 ```
