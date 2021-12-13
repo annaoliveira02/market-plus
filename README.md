@@ -76,7 +76,7 @@ Caso dê tudo certo, a resposta será assim:
   {
     "id": 1,
     "name": "kaio",
-    "city": "brasólia",
+    "city": "brasília",
     "state": "DF",
     "country": "Brasil",
     "email": "kaio@email.com",
