@@ -16,6 +16,8 @@ def register_products():
     try:
         data = request.get_json()
         current_store = get_jwt_identity()
+        if 'cnpj' not in current_store:
+            return {'alerta':'Usuário não autorizado para cadastrar produto'}, 401
         Products.validate_keys(data)
         product = Products(**data)
         current_app.db.session.add(product)
@@ -89,6 +91,8 @@ def change_products(id):
         relation = ProductsStoreModel.query.filter_by(product_id = id, store_id=current_store['id']).one_or_none()
         if not relation:
             raise NotFoundError
+        if 'cnpj' not in current_store:
+            return {'alerta':'Usuário não autorizado para alterar produto'}, 401
 
         setattr(relation, 'price_by_store', data['price'])
 
