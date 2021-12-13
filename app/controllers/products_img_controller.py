@@ -9,7 +9,10 @@ from io import BytesIO
 @jwt_required()
 def upload_product(id):
     product = request.files['product']
-
+    current = get_jwt_identity()
+    if 'cnpj' not in current:
+        return {'alerta':'Usuário não autorizado para cadastrar imagem'}, 401
+    print(current)
     if not product:
         return {'alerta':'Nenhuma imagem de produto enviada!'}, 400
     filename = secure_filename(product.filename)
