@@ -1,4 +1,4 @@
-from flask import request, current_app, jsonify
+from flask import request, current_app, jsonify, send_file
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from app.exceptions.exceptions import (
     InvalidKeyError,
@@ -49,9 +49,7 @@ def get_user():
     result = Users.query.all()
     if len(result) == 0:
         return {"alerta": "Nenhum dado encontrado"}, 404
-    return (
-        jsonify(
-            [
+    return jsonify([
                 {
                     "id": user.id,
                     "name": user.name,
@@ -73,10 +71,8 @@ def get_user():
                     ],
                 }
                 for user in result
-            ]
-        ),
-        200,
-    )
+            ]), 200
+    
 
 
 @jwt_required()
