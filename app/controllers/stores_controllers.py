@@ -23,7 +23,7 @@ def register_store():
         return e.message, 409
     except InvalidKeyError:
         return {
-            "alerta": "Informações incorretas (nome, endereço, imagem, número, cnpj e senha)."
+            "alerta": "Informações incorretas (nome, endereço, cidade,, número, cnpj e senha)."
         }, 400
     except InvalidTypeError:
         return {"alerta": "Informações inválidas (apenas texto)."}, 400
@@ -40,7 +40,8 @@ def get_all():
                     "id": store.id,
                     "name": store.name,
                     "address": store.address,
-                    "store_img": store.store_img,
+                    "city": store.city,
+                    "state": store.state,
                     "phone_number": store.phone_number,
                     "cnpj": store.cnpj,
                     "products": [

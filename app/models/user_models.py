@@ -32,6 +32,7 @@ class Users(db.Model):
     password_hash = Column(String(255), nullable=False)
 
     sugestions = relationship("Sugestions", backref="user", uselist=True)
+    user_photo = relationship("UserImage", backref="users_img", uselist=True)
 
     favorite_products = relationship(
         "Products", secondary="products_users", backref=backref("users")
@@ -46,7 +47,7 @@ class Users(db.Model):
 
     @staticmethod
     def validate_register_args(data):
-        requested_args = ["name", "city", "state", "country", "email", "password"]
+        requested_args = ["name", "city", "state", "email", "password"]
 
         for item in requested_args:
             if item not in data.keys():
