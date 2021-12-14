@@ -166,3 +166,38 @@ def get_by_id(id):
         return e.message, 404
 
     return jsonify(current)
+
+
+def get_category():
+    keys = request.args.keys()
+    category = str(request.args.get('category'))
+    name = str(request.args.get('name'))
+
+    if request.args == {}:
+        list = Products.query.all()
+    if "category" in keys:
+        list = Products.query.filter(Products.category==category).all()
+    if "name" in keys:
+        list = Products.query.filter(Products.name==name).all()
+    return (
+        jsonify(
+            [
+                {
+                    "id": product.id,
+                    "name": product.name,
+                    "category": product.category,
+                    "price": product.price,
+                    "stores": [
+                        {
+                            "name": store.name,
+                            "address": store.address,
+                            "phone_number": store.phone_number,
+                        }
+                        for store in product.stores
+                    ],
+                }
+                for product in list
+            ]
+        ),
+        200,
+    )
