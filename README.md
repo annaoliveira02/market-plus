@@ -395,7 +395,59 @@ Caso dê tudo certo a resposta será assim (sem mensagem):
 `DELETE /products/1 - FORMATO DA RESPOSTA - 204`
 
 
+### Listar sugestões
 
+As sugestões são mensagem enviadas pelos usuários, tendo como objetivo mapear produtos ou mercados faltantes na aplicação, bem como críticas/avaliações sobre o Market+ em si.
+
+`GET /sugestions -  FORMATO DA REQUISIÇÃO `
+
+Caso dê tudo certo, a resposta será assim:
+
+`GET /sugestions - FORMATO DA RESPOSTA - STATUS 200`
+
+```
+[
+	{
+		"id": 1,
+		"type": "Market+",
+		"message": "Gostaria que o aplicativo funcionasse melhor no celular",
+		"users_id": 4
+	},
+	{
+		"id": 2,
+		"type": "Supermercados",
+		"message": "Olá, moro em Fortaleza e não encontrei o Supermercado Cometa na lista, por favor adicionem.",
+		"users_id": 2
+	}
+]
+```
+
+### Publicar sugestão
+Deve ser informado no cabeçalho da requisição o campo "Authorization", dessa forma:
+
+> Authorization: Bearer {token}
+
+`POST /sugestions - FORMATO DA REQUISIÇÃO `
+
+```json
+{
+	"type": "Produtos",
+	"message": "O refrigerante Kuat 2L não está no catálogo, favor adicionar."
+}
+```
+
+Caso dê tudo certo, a resposta será assim:
+
+`POST /sugestions - FORMATO DA RESPOSTA - STATUS 201`
+
+```json
+{
+	"id": 4,
+	"type": "Produtos",
+	"message": "O refrigerante Kuat 2L não está no catálogo, favor adicionar.",
+	"users_id": 1
+}
+```
 
 
 
