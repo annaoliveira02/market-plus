@@ -4,7 +4,7 @@ from app.controllers.products_controllers import (
     register_products,
     change_products,
     delete_products,
-    get_by_id, get_category
+    get_by_id, get_category, add_to_store
 )
 
 bp_products = Blueprint("bp_products", __name__)
@@ -15,3 +15,4 @@ bp_products.get("/products/<id>")(get_by_id)
 bp_products.patch("/products/<id>")(change_products)
 bp_products.delete("/products/<id>")(delete_products)
 bp_products.get("/products/list")(get_category)
+bp_products.post("/products/<id>")(add_to_store)
