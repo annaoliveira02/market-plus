@@ -482,3 +482,16 @@ Caso dê tudo certo, a resposta será assim:
 
 `DELETE /favorites/2 - FORMATO DA RESPOSTA - STATUS 204`
 
+
+
+
+
+________
+Desenvolvido por:
+[Anna Oliveira](https://gitlab.com/annaoliveira02),
+[Kaio Iwakiri](https://gitlab.com/KaioIwakiri), 
+[Lucas Brasil](https://gitlab.com/lucasbrasil),
+[Gabriela Rodrigues](https://gitlab.com/gaavro) e
+[Maikol Moraes](https://gitlab.com/Maik0l)
+
+@ **Kenzie Academy Brasil**
