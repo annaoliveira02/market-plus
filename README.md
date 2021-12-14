@@ -80,16 +80,26 @@ Caso dê tudo certo, a resposta será assim:
 
 ```json
 [
-  {
-    "id": 1,
-    "name": "kaio",
-    "city": "brasília",
-    "state": "DF",
-    "country": "Brasil",
-    "email": "kaio@email.com",
-    "sugestions": [],
-    "favorite_products": []
-  }
+  	{
+		"id": 1,
+		"name": "Lucas Brasil",
+		"city": "Maricá",
+		"state": "RJ",
+		"country": "Brasil",
+		"email": "lucas@email.com",
+		"sugestions": [],
+		"favorite_products": []
+	},
+	{
+		"id": 2,
+		"name": "Kaio Iwakiri",
+		"city": "Brasília",
+		"state": "DF",
+		"country": "Brasil",
+		"email": "kaio2@email.com",
+		"sugestions": [],
+		"favorite_products": []
+	}
 ]
 ```
 
