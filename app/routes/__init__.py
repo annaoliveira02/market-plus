@@ -20,3 +20,9 @@ def init_app(app: Flask):
     from app.routes.img_blueprints import bp_img
 
     app.register_blueprint(bp_img)
+
+    from app.routes.product_img_blueprint import bp_product_img
+    app.register_blueprint(bp_product_img)
+
+    from app.routes.store_img_blueprint import bp_store_img
+    app.register_blueprint(bp_store_img)

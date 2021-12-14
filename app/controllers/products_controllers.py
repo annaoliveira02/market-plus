@@ -16,6 +16,8 @@ def register_products():
     try:
         data = request.get_json()
         current_store = get_jwt_identity()
+        if 'cnpj' not in current_store:
+            return {'alerta':'Usuário não autorizado para cadastrar produto'}, 401
         Products.validate_keys(data)
         product = Products(**data)
         current_app.db.session.add(product)
@@ -86,13 +88,15 @@ def change_products(id):
         ProductsStoreModel.validate_patch_args(data)
         Products.validate_id(product)
         current_store = get_jwt_identity()
-        # relation = ProductsStoreModel.query.filter_by(product_id = id, store_id=current_store['id']).first()
-        if not product:
+        relation = ProductsStoreModel.query.filter_by(product_id = id, store_id=current_store['id']).one_or_none()
+        if not relation:
             raise NotFoundError
+        if 'cnpj' not in current_store:
+            return {'alerta':'Usuário não autorizado para alterar produto'}, 401
 
-        setattr(product, 'price_by_store', data['price'])
+        setattr(relation, 'price_by_store', data['price'])
 
-        current_app.db.session.add(product)
+        current_app.db.session.add(relation)
         current_app.db.session.commit()
 
         return {
@@ -133,3 +137,38 @@ def get_by_id(id):
         return e.message, 404
 
     return jsonify(current)
+
+
+def get_category():
+    keys = request.args.keys()
+    category = str(request.args.get('category'))
+    name = str(request.args.get('name'))
+
+    if request.args == {}:
+        list = Products.query.all()
+    if "category" in keys:
+        list = Products.query.filter(Products.category==category).all()
+    if "name" in keys:
+        list = Products.query.filter(Products.name==name).all()
+    return (
+        jsonify(
+            [
+                {
+                    "id": product.id,
+                    "name": product.name,
+                    "category": product.category,
+                    "price": product.price,
+                    "stores": [
+                        {
+                            "name": store.name,
+                            "address": store.address,
+                            "phone_number": store.phone_number,
+                        }
+                        for store in product.stores
+                    ],
+                }
+                for product in list
+            ]
+        ),
+        200,
+    )

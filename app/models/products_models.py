@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from app.configs.database import db
 from sqlalchemy import Column, String, Integer, Float
-from sqlalchemy.orm import validates
+from sqlalchemy.orm import relationship, validates
 
 from app.exceptions.exceptions import (
     InvalidKeyError,
@@ -25,6 +25,8 @@ class Products(db.Model):
     name = Column(String(100), nullable=False, unique=True)
     category = Column(String(30), nullable=False)
     price = Column(Float, nullable=False)
+    product_img = relationship("ProductImg", backref="products_img", uselist=True)
+
 
     @validates("name", "category", "price")
     def validates(self, key, value):
