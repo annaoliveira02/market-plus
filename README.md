@@ -249,7 +249,7 @@ Caso dê tudo certo, a resposta será assim:
 
 Caso dê tudo certo, a resposta será assim:
 
-`GET /stores - FORMATO DA RESPOSTA - STATUS 200`
+`GET /stores/2 - FORMATO DA RESPOSTA - STATUS 200`
 
 ```
 {
@@ -275,6 +275,126 @@ Deve ser informado no cabeçalho da requisição o campo "Authorization", dessa 
 Caso dê tudo certo a resposta será assim (sem mensagem):
 
 `DELETE /stores/1 - FORMATO DA RESPOSTA - 204`
+
+
+### Buscar produtos
+
+`GET /products -  FORMATO DA REQUISIÇÃO `
+
+Caso dê tudo certo, a resposta será assim:
+
+`GET /products - FORMATO DA RESPOSTA - STATUS 200`
+
+```json
+[
+	{
+	"id": 1,
+	"name": "Sabonete Dove",
+	"category": "Limpeza",
+	"price": 1.99
+	},
+	{
+	"id": 2,
+	"name": "Doritos",
+	"category": "Salgadinhos",
+	"price": 4.99
+	},
+	{
+	"id": 3,
+	"name": "Coca-cola 2L",
+	"category": "Bebidas",
+	"price": 6.99
+	}
+]
+```
+
+
+### Buscar produto específico (id)
+
+`GET /products/1 -  FORMATO DA REQUISIÇÃO `
+
+Caso dê tudo certo, a resposta será assim:
+
+`GET /products/1 - FORMATO DA RESPOSTA - STATUS 200`
+
+```
+{
+	"id": 1,
+	"name": "Sabonete Dove",
+	"category": "Limpeza",
+	"price": 1.99
+}
+```
+
+
+### Criando produto
+Esta rota precisa de permissão específica, tendo em mente que apenas um supermercado pode adicionar um produto. Deve ser informado no cabeçalho da requisição o campo "Authorization", dessa forma:
+
+> Authorization: Bearer {token}
+
+`POST /products - FORMATO DA REQUISIÇÃO `
+
+```json
+{
+	"name": "Café Solúvel Três Corações 60g",
+	"category": "Alimentos",
+	"price": 4.99
+}
+```
+
+Caso dê tudo certo, a resposta será assim:
+
+`POST /products - FORMATO DA RESPOSTA - STATUS 201`
+
+```json
+{
+	"id": 4,
+	"name": "Café Solúvel Três Corações",
+	"category": "Alimentos",
+	"price": 4.99
+}
+```
+
+### Atualizar produto (id)
+
+Esta rota precisa de permissão específica, tendo em mente que apenas um supermercado pode adicionar um produto. Deve ser informado no cabeçalho da requisição o campo "Authorization", dessa forma:
+
+> Authorization: Bearer {token}
+
+`PATCH /products/1 -  FORMATO DA REQUISIÇÃO `
+
+```json
+{
+	"price": 7.42
+}
+```
+
+Caso dê tudo certo a resposta será assim:
+
+`PATCH /products/1 - FORMATO DA RESPOSTA - 201`
+
+```json
+{
+	"id": 1,
+	"name": "Sabonete Dove",
+	"category": "Limpeza",
+	"price": 7.42
+}
+```
+
+### Remover produto
+
+Deve ser informado no cabeçalho da requisição o campo "Authorization", dessa forma:
+
+> Authorization: Bearer {token}
+
+`DELETE /products/1- FORMATO DA REQUISIÇÃO`
+
+Caso dê tudo certo a resposta será assim (sem mensagem):
+
+`DELETE /products/1 - FORMATO DA RESPOSTA - 204`
+
+
 
 
 
