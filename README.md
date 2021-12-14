@@ -16,7 +16,7 @@ Requisições para a API devem seguir os padrões:
 
 ## Endpoints
 
-A API tem um total de 13 endpoints, que estão em torno principalmente do usuário (user) e da loja (store) - podendo cadastrar seus perfis, e realizar requisições específicas.
+A API tem um total de 8 endpoints, que estão em torno principalmente do usuário (user) e da loja (store) - podendo cadastrar seus perfis, e realizar requisições específicas.
 
 O url base da API é [https://capstone-api-q3.herokuapp.com/](https://capstone-api-q3.herokuapp.com/)
 
@@ -180,7 +180,7 @@ Caso dê tudo certo, a resposta será assim:
 
 Caso dê tudo certo, a resposta será assim:
 
-`POST /login_users - FORMATO DA RESPOSTA - STATUS 200`
+`POST /login_store - FORMATO DA RESPOSTA - STATUS 200`
 
 ```json
 {
@@ -450,5 +450,25 @@ Caso dê tudo certo, a resposta será assim:
 ```
 
 
+### Adicionar aos favoritos (id do produto)
+O usuário cadastrado pode escolher produtos que ele deseja manter em destaque no seu perfil. Deve ser informado no cabeçalho da requisição o campo "Authorization", dessa forma:
 
+> Authorization: Bearer {token}
+
+`POST /favorites/2 - FORMATO DA REQUISIÇÃO `
+
+Caso dê tudo certo, a resposta será assim:
+
+`POST /favorites/2 - FORMATO DA RESPOSTA - STATUS 204`
+
+### Remover dos favoritos (id do produto)
+Deve ser informado no cabeçalho da requisição o campo "Authorization", dessa forma:
+
+> Authorization: Bearer {token}
+
+`DELETE /favorites/2 - FORMATO DA REQUISIÇÃO `
+
+Caso dê tudo certo, a resposta será assim:
+
+`DELETE /favorites/2 - FORMATO DA RESPOSTA - STATUS 204`
 
