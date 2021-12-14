@@ -67,7 +67,7 @@ def get_all():
                         {
                             "name": store.name,
                             "address": store.address,
-                            "store_img": store.store_img,
+                            # "store_img": store.store_img,
                             "phone_number": store.phone_number,
                         }
                         for store in product.stores
@@ -172,3 +172,35 @@ def get_category():
         ),
         200,
     )
+
+
+@jwt_required()
+def add_to_store(id):
+    current = Products.query.get(id)
+    data = request.get_json()
+    current_store = get_jwt_identity()
+    try:
+        ProductsStoreModel.validate_patch_args(data)
+        Products.validate_id(current)
+        data2 = {
+            "product_id": id,
+            "store_id": current_store["id"],
+            "price_by_store": data['price'],
+        }
+        products_store = ProductsStoreModel(**data2)        
+        current_app.db.session.add(products_store)
+        current_app.db.session.commit()
+        return{"alerta": "Produto adicionado"},200
+    except NotFoundError as e:
+        return e.message, 404
+    except InvalidKeyError:
+        return {
+            "alerta": "Campos obrigatórios: Preço."
+        }, 400
+    except InvalidTypeError:
+        return {"alerta": "Preço deve ser em formato float."}, 400
+
+
+        
+    
+    
