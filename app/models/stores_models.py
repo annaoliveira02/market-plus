@@ -32,7 +32,7 @@ class Stores(db.Model):
     phone_number = Column(String(20))
     cnpj = Column(String(14), nullable=False, unique=True)
     password_hash = Column(String(255), nullable=False)
-
+    store_photo = relationship("StoreImage", backref="stores_img", uselist=True)
     products = relationship(
         "Products", secondary="products_store", backref=backref("stores")
     )
