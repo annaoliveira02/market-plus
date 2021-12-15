@@ -7,6 +7,7 @@ from app.exceptions.exceptions import (
     ProductAlreadyExistsError,
 )
 from app.models.products_models import Products
+from app.models.stores_models import Stores
 from app.models.user_models import Users
 from flask_jwt_extended import jwt_required
 from app.models.products_store_models import ProductsStoreModel
@@ -16,6 +17,7 @@ from email.mime.text import MIMEText
 import smtplib, ssl
 from os import environ
 from dotenv import load_dotenv
+import random
 
 load_dotenv()
 email = MIMEMultipart()
@@ -243,6 +245,14 @@ def add_to_store(id):
         return {"alerta": "Preço deve ser em formato float."}, 400
 
 
-        
-    
+def add_to_database():
+    all_products = Products.query.all()
+    all_stores = Stores.query.all()
+
+    for store in all_stores:
+        for product in all_products:
+            current_app.db.session.add(ProductsStoreModel(product_id=product.id, store_id=store.id, price_by_store= float(random.randrange(int(product.price) - 1, int(product.price) + 1, 1))))
+            current_app.db.session.commit()
+
+    return {"alerta": "deu bom"}, 201
     
