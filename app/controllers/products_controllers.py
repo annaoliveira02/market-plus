@@ -9,6 +9,7 @@ from app.exceptions.exceptions import (
 from app.models.products_models import Products
 from flask_jwt_extended import jwt_required
 from app.models.products_store_models import ProductsStoreModel
+from app.models.products_user_models import ProductsUserModel
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib, ssl
@@ -120,6 +121,7 @@ def change_products(id):
         product_name = product.name
         product_price = relation.price_by_store
         new_price = data["price"]
+        #users_to_send_email = ProductsUserModel.query.filter(ProductsUserModel.product_id == id).all()
         if new_price < product_price:
             send_email(product_name, product_price, new_price)
 
