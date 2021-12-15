@@ -244,15 +244,3 @@ def add_to_store(id):
     except InvalidTypeError:
         return {"alerta": "Preço deve ser em formato float."}, 400
 
-
-def add_to_database():
-    all_products = Products.query.all()
-    all_stores = Stores.query.all()
-
-    for store in all_stores:
-        for product in all_products:
-            current_app.db.session.add(ProductsStoreModel(product_id=product.id, store_id=store.id, price_by_store= float(random.randrange(int(product.price) - 1, int(product.price) + 1, 1))))
-            current_app.db.session.commit()
-
-    return {"alerta": "deu bom"}, 201
-    
