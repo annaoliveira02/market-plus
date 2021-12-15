@@ -176,8 +176,6 @@ def change_products(id):
         return {"alerta": "Preço deve ser em formato float."}, 400
 
 
-
-
 @jwt_required()
 def delete_products(id):
     current = Products.query.get(id)
