@@ -93,7 +93,6 @@ def get_all():
                         {
                             "name": store.name,
                             "address": store.address,
-                            # "store_img": store.store_img,
                             "phone_number": store.phone_number,
                         }
                         for store in product.stores
