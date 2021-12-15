@@ -27,15 +27,33 @@ def send_email(name, price, new_price, emails):
     password = environ.get("PASSWORD")
     email["From"] = environ.get("EMAIL_FROM")
     email["To"] = ", ".join(recipients) # E-MAIL QUE RECEBE
-    email["Subject"] = "ALERTA DE PROMOÇÃO!" # ASSUNTO DO E-MAIL
-    message = f"O produto {upper_name} que estava pelo preço de <b>R${price}</b> entrou em <b>promoção!</b> Agora está pelo preço de <b>R${new_price}!</b>"
+    email["Subject"] = "ALERTA DE PROMOÇÃO! 🚨" # ASSUNTO DO E-MAIL
     
-    email.attach(MIMEText(message, "html"))
+    html = f"""\
+        <html>
+            <body>
+                <div style="background-color:#67982e;padding:10px 20px;color:#ffffff">
+                    <h2>Market+ informa: <span style="color:#540c7d">promoção à vista!</span></h2>
+                </div>
+                <div style="padding:20px 0px;text-align:center">
+                    <div>
+                        <h3 style="font-size: 18px">NOVOS PREÇOS CHEGARAM ÀS LOJAS!</h3>
+                        <img src="https://dummyimage.com/500x300/000/fff&text=Dummy+image" style="height: 200px;">
+                        <p style="margin: 0 15rem">O produto <span style="font-size:15px"><b>{upper_name}</b></span> que estava pelo preço de <b>R${price}</b> entrou em <b>promoção!</b> Agora está pelo preço de  <span style="font-size:20px; color:#cc3737"><b>R${new_price}!</b></span></p>
+                    </div>
+                </div>
+            </body>
+        </html>
+        """
+
+    email.attach(MIMEText(html, "html"))
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.gmail.com", port=465, context=context) as server:
         server.login(email["From"], password)
         server.sendmail(email["From"], recipients, email.as_string())
 
+    html = ""
+    recipients = []
 
 @jwt_required()
 def register_products():
