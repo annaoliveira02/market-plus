@@ -7,8 +7,34 @@ from app.exceptions.exceptions import (
     ProductAlreadyExistsError,
 )
 from app.models.products_models import Products
+from app.models.user_models import Users
 from flask_jwt_extended import jwt_required
 from app.models.products_store_models import ProductsStoreModel
+from app.models.products_user_models import ProductsUserModel
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import smtplib, ssl
+from os import environ
+from dotenv import load_dotenv
+
+load_dotenv()
+email = MIMEMultipart()
+
+def send_email(name, price, new_price, emails):
+    recipients = emails
+    print(recipients)
+    upper_name = name.upper()
+    password = environ.get("PASSWORD")
+    email["From"] = environ.get("EMAIL_FROM")
+    email["To"] = ", ".join(recipients) # E-MAIL QUE RECEBE
+    email["Subject"] = "ALERTA DE PROMOÇÃO!" # ASSUNTO DO E-MAIL
+    message = f"O produto {upper_name} que estava pelo preço de <b>R${price}</b> entrou em <b>promoção!</b> Agora está pelo preço de <b>R${new_price}!</b>"
+    
+    email.attach(MIMEText(message, "html"))
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL("smtp.gmail.com", port=465, context=context) as server:
+        server.login(email["From"], password)
+        server.sendmail(email["From"], recipients, email.as_string())
 
 
 @jwt_required()
@@ -87,12 +113,29 @@ def change_products(id):
         data = request.get_json()
         ProductsStoreModel.validate_patch_args(data)
         Products.validate_id(product)
+
         current_store = get_jwt_identity()
         relation = ProductsStoreModel.query.filter_by(product_id = id, store_id=current_store['id']).one_or_none()
         if not relation:
             raise NotFoundError
         if 'cnpj' not in current_store:
             return {'alerta':'Usuário não autorizado para alterar produto'}, 401
+        
+        product_name = product.name
+        product_price = relation.price_by_store
+        users = []
+        emails = []
+        new_price = data["price"]
+        users_to_send_email = ProductsUserModel.query.filter(ProductsUserModel.product_id == id).all()
+        
+        for user in users_to_send_email:
+            users.append(Users.query.filter(Users.id == user.users_id).first())
+        
+        for user in users:
+            emails.append(user.email)
+        
+        if new_price < product_price:
+            send_email(product_name, product_price, new_price, emails)
 
         setattr(relation, 'price_by_store', data['price'])
 
