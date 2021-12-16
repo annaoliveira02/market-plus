@@ -286,3 +286,8 @@ def patching_products_price():
         current_app.db.session.add(product)
         current_app.db.session.commit()
     return {"alerta": "mexemo no preço"}
+
+def get_price_by_store():
+    all_products = ProductsStoreModel.query.all()
+
+    return jsonify(all_products), 200
