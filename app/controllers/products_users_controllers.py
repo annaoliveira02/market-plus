@@ -32,6 +32,6 @@ def remove_from_favorites(id):
 @jwt_required()
 def get_favorites():
     current = get_jwt_identity()
-    result = Users.query.filter(favorite_products= current['favorite_products']).all()
+    result = Users.query.get(current['id'])
 
     return jsonify(result.favorite_products)
