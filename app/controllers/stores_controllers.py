@@ -47,7 +47,7 @@ def get_all():
                         {
                             "name": product.name,
                             "category": product.category,
-                            # "product_img": product.product_img,
+                            "price": product.price
                         }
                         for product in store.products
                     ],
@@ -73,7 +73,32 @@ def get_stores_id(id):
     current = Stores.query.get(id)
     if current is None:
         return {"alerta": "Loja não encontrada"}, 404
-    return jsonify(current)
+    return (
+        jsonify(
+            [
+                {
+                    "id": store.id,
+                    "name": store.name,
+                    "address": store.address,
+                    "city": store.city,
+                    "state": store.state,
+                    "phone_number": store.phone_number,
+                    "cnpj": store.cnpj,
+                    "products": [
+                        {
+                            "name": product.name,
+                            "category": product.category,
+                            "price": product.price
+                        }
+                        for product in store.products
+                    ],
+                }
+                for store in current
+            ]
+        ),
+        200,
+    )
+
 
 
 def login_store():
