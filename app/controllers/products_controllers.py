@@ -139,10 +139,10 @@ def get_by_id(id):
                     "price": current.price,
                     "stores": [
                         {
+                            "store_id": store.id,
                             "name": store.name,
                             "address": store.address,
                             "phone_number": store.phone_number,
-                            "price_by_store": store.price_by_store.price_by_store,
                         }
                         for store in current.stores
                     ],
