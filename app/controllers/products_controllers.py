@@ -167,8 +167,8 @@ def change_products(id):
         if 'cnpj' not in current_store:
             return {'alerta':'Usuário não autorizado para alterar produto'}, 401
         
-        product_name = product.name
-        product_price = relation.price_by_store
+        name = product.name
+        price = relation.price_by_store
         users = []
         emails = []
         new_price = data["price"]
@@ -180,8 +180,8 @@ def change_products(id):
         for user in users:
             emails.append(user.email)
         
-        if new_price < product_price:
-            send_email(product_name, product_price, new_price, emails)
+        if new_price < price:
+            send_email(name, price, new_price, emails)
 
         setattr(relation, 'price_by_store', data['price'])
 
