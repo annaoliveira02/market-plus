@@ -287,6 +287,7 @@ def patching_products_price():
         current_app.db.session.commit()
     return {"alerta": "mexemo no preço"}
 
+
 def get_price_by_store():
     all_products = ProductsStoreModel.query.all()
 
