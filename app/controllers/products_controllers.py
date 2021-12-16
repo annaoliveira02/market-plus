@@ -124,6 +124,33 @@ def get_all():
         200,
     )
 
+def get_by_id(id):
+    current = Products.query.get(id)
+    try:
+        Products.validate_id(current)
+    except NotFoundError as e:
+        return e.message, 404
+
+    return (jsonify(
+                {
+                    "id": current.id,
+                    "name": current.name,
+                    "category": current.category,
+                    "price": current.price,
+                    "stores": [
+                        {
+                            "name": store.name,
+                            "address": store.address,
+                            "phone_number": store.phone_number,
+                            "price_by_store": store.price_by_store,
+                        }
+                        for store in current.stores
+                    ],
+                }
+        ),
+        200,
+    )
+
 
 @jwt_required()
 def change_products(id):
@@ -189,16 +216,6 @@ def delete_products(id):
     return "", 204
 
 
-def get_by_id(id):
-    current = Products.query.get(id)
-    try:
-        Products.validate_id(current)
-    except NotFoundError as e:
-        return e.message, 404
-
-    return jsonify(current)
-
-
 def get_category():
     keys = request.args.keys()
     category = str(request.args.get('category'))
@@ -260,3 +277,12 @@ def add_to_store(id):
     except InvalidTypeError:
         return {"alerta": "Preço deve ser em formato float."}, 400
 
+def patching_products_price():
+    all_products = ProductsStoreModel.query.all()
+
+    for product in all_products:
+        new_price=float(random.randrange(int(product.price_by_store) + 1, int(product.price_by_store) + 2, 1))
+        setattr(product, 'price_by_store', new_price)
+        current_app.db.session.add(product)
+        current_app.db.session.commit()
+    return {"alerta": "mexemo no preço"}

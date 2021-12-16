@@ -58,6 +58,34 @@ def get_all():
         200,
     )
 
+def get_stores_id(id):
+    current = Stores.query.get(id)
+    if current is None:
+        return {"alerta": "Loja não encontrada"}, 404
+    return (
+        jsonify(
+            
+                {
+                    "id": current.id,
+                    "name": current.name,
+                    "address": current.address,
+                    "city": current.city,
+                    "state": current.state,
+                    "phone_number": current.phone_number,
+                    "cnpj": current.cnpj,
+                    "products": [
+                        {
+                            "name": product.name,
+                            "category": product.category,
+                        }
+                        for product in current.products
+                    ],
+                }
+
+        ),
+        200,
+    )
+
 
 @jwt_required()
 def delete_stores(id):
@@ -67,13 +95,6 @@ def delete_stores(id):
     current_app.db.session.delete(current)
     current_app.db.session.commit()
     return "", 204
-
-
-def get_stores_id(id):
-    current = Stores.query.get(id)
-    if current is None:
-        return {"alerta": "Loja não encontrada"}, 404
-    return jsonify(current)
 
 
 def login_store():
