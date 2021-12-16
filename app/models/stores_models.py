@@ -36,7 +36,7 @@ class Stores(db.Model):
     products = relationship(
         "Products", secondary="products_store", backref=backref("stores")
     )
-    price_by_store = relationship('ProductsStoreModel', backref="products_store", uselist=True)
+    price_by_store = relationship('ProductsStoreModel', backref="products_store")
 
     @property
     def password(self):
