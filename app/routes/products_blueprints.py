@@ -1,5 +1,6 @@
 from flask import Blueprint
 from app.controllers.products_controllers import (
+    add_to_store,
     get_all,
     register_products,
     change_products,
@@ -17,3 +18,4 @@ bp_products.delete("/products/<id>")(delete_products)
 bp_products.get("/products/list")(get_category)
 # bp_products.patch("/products")(patching_products_price)
 bp_products.get("/relations")(get_price_by_store)
+bp_products.post("/relations")(add_to_store)
