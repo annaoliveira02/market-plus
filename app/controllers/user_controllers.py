@@ -106,14 +106,7 @@ def change_users():
         current_app.db.session.add(user)
         current_app.db.session.commit()
 
-        return {
-            "id": user.id,
-            "name": user.name,
-            "city": user.city,
-            "state": user.state,
-            "country": user.country,
-            "email": user.email,
-        }, 200
+        return jsonify(user), 200
 
     except NotFoundError:
         return {"alerta": "Usuário não encontrada"}, 404
