@@ -4,7 +4,7 @@ from app.controllers.products_users_controllers import (
     remove_from_favorites,
 )
 
-bp_favorites = Blueprint("bp_favorites", __name__)
+bp_products_store = Blueprint("bp_products_store", __name__)
 
-bp_favorites.post("/favorites/<id>")(add_to_favorites)
-bp_favorites.delete("/favorites/<id>")(remove_from_favorites)
+bp_products_store.post("/favorites/<id>")(add_to_favorites)
+bp_products_store.delete("/favorites/<id>")(remove_from_favorites)

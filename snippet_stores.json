@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Supermercado Cidade Canção",
+    "address": "Rua Curitiba, 2256",
+    "city": "Apucarana",
+    "state": "PR",
+    "phone_number": "(43) 3422-9179",
+    "cnpj": "76430438000175",
+    "password": "12345678"
+  },
+  {
+    "name": "Molicenter",
+    "address": "Rua Clóvis da Fonseca, 350",
+    "city": "Apucarana",
+    "state": "PR",
+    "phone_number": "(43) 3122-2600",
+    "cnpj": "76430438000176",
+    "password": "12345678"
+  },
+  {
+    "name": "Supermercado Economico",
+    "address": "Rua Minas Gerais, 2373",
+    "city": "Apucarana",
+    "state": "PR",
+    "phone_number": "(43) 3425-6336",
+    "cnpj": "76430438000177",
+    "password": "12345678"
+  },
+  {
+    "name": "Condor",
+    "address": "Rua Minas Gerais, 500",
+    "city": "Apucarana",
+    "state": "PR",
+    "phone_number": "(43) 3425-6336",
+    "cnpj": "76430438000178",
+    "password": "12345678"
+  },
+  {
+    "name": "Mercado Alvorada",
+    "address": "Rua Talita Bresolin, 2373",
+    "city": "Apucarana",
+    "state": "PR",
+    "phone_number": "(43) 3425-6336",
+    "cnpj": "76430438000179",
+    "password": "12345678"
+  },
+  {
+    "name": "Supermercado Muffato",
+    "address": "Rua Oswaldo Cruz 2373",
+    "city": "Apucarana",
+    "state": "PR",
+    "phone_number": "(43) 3425-6336",
+    "cnpj": "76430438000180",
+    "password": "12345678"
+  },
+  {
+    "name": "Mercado Bom Preço",
+    "address": "Rua Oswaldo Cruz 2373",
+    "city": "Apucarana",
+    "state": "PR",
+    "phone_number": "(43) 3425-6336",
+    "cnpj": "76430438000181",
+    "password": "12345678"
+  },
+  {
+    "name": "Mercado Faneli",
+    "address": "Rua Aldo Marcachini, 220",
+    "city": "Apucarana",
+    "state": "PR",
+    "phone_number": "(43) 3425-6336",
+    "cnpj": "76430438000182",
+    "password": "12345678"
+  }
+]

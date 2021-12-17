@@ -1,0 +1,752 @@
+[
+  {
+    "name": "Alho",
+    "category": "Hortifruti",
+    "price": 18.99
+  },
+  {
+    "name": "Batata",
+    "category": "Hortifruti",
+    "price": 1.99
+  },
+  {
+    "name": "Cebola",
+    "category": "Hortifruti",
+    "price": 2.49
+  },
+  {
+    "name": "Chuchu",
+    "category": "Hortifruti",
+    "price": 0.99
+  },
+  {
+    "name": "Pepino",
+    "category": "Hortifruti",
+    "price": 0.99
+  },
+  {
+    "name": "Pimentão",
+    "category": "Hortifruti",
+    "price": 5.99
+  },
+  {
+    "name": "Repolho",
+    "category": "Hortifruti",
+    "price": 2.99
+  },
+  {
+    "name": "Tomate",
+    "category": "Hortifruti",
+    "price": 6.99
+  },
+  {
+    "name": "Abacaxi",
+    "category": "Hortifruti",
+    "price": 4.99
+  },
+  {
+    "name": "Maçã gala",
+    "category": "Hortifruti",
+    "price": 3.99
+  },
+  {
+    "name": "Manga palmer",
+    "category": "Hortifruti",
+    "price": 2.99
+  },
+  {
+    "name": "Limão",
+    "category": "Hortifruti",
+    "price": 3.99
+  },
+  {
+    "name": "Morango",
+    "category": "Hortifruti",
+    "price": 3.99
+  },
+  {
+    "name": "Mamão papaia",
+    "category": "Hortifruti",
+    "price": 3.99
+  },
+  {
+    "name": "Alface crespa",
+    "category": "Hortifruti",
+    "price": 1.49
+  },
+  {
+    "name": "Rúcula",
+    "category": "Hortifruti",
+    "price": 1.99
+  },
+  {
+    "name": "Cheiro verde",
+    "category": "Hortifruti",
+    "price": 1.49
+  },
+  {
+    "name": "Alface lisa",
+    "category": "Hortifruti",
+    "price": 1.49
+  },
+  {
+    "name": "Brócolis",
+    "category": "Hortifruti",
+    "price": 4.49
+  },
+  {
+    "name": "Couve-flor",
+    "category": "Hortifruti",
+    "price": 3.49
+  },
+  {
+    "name": "Uva",
+    "category": "Hortifruti",
+    "price": 5.49
+  },
+  {
+    "name": "Laranja pera",
+    "category": "Hortifruti",
+    "price": 3.99
+  },
+  {
+    "name": "Laranja lima",
+    "category": "Hortifruti",
+    "price": 4.99
+  },
+  {
+    "name": "Melão",
+    "category": "Hortifruti",
+    "price": 3.99
+  },
+  {
+    "name": "Maçã importada",
+    "category": "Hortifruti",
+    "price": 12.99
+  },
+  {
+    "name": "Manga tommy",
+    "category": "Hortifruti",
+    "price": 2.99
+  },
+  {
+    "name": "Maracujá",
+    "category": "Hortifruti",
+    "price": 9.98
+  },
+  {
+    "name": "Kiwi",
+    "category": "Hortifruti",
+    "price": 24.99
+  },
+  {
+    "name": "Pera",
+    "category": "Hortifruti",
+    "price": 13.99
+  },
+  {
+    "name": "Banana prata",
+    "category": "Hortifruti",
+    "price": 4.99
+  },
+  {
+    "name": "Banana nanica",
+    "category": "Hortifruti",
+    "price": 4.99
+  },
+  {
+    "name": "Melancia",
+    "category": "Hortifruti",
+    "price": 2.99
+  },
+  {
+    "name": "Pêssego",
+    "category": "Hortifruti",
+    "price": 9.98
+  },
+  {
+    "name": "Tangerina",
+    "category": "Hortifruti",
+    "price": 6.99
+  },
+  {
+    "name": "Pão Francês",
+    "category": "Mercearia",
+    "price": 45.03
+  },
+  {
+    "name": "Donuts",
+    "category": "Mercearia",
+    "price": 40.06
+  },
+  {
+    "name": "Torta de brigadeiro",
+    "category": "Mercearia",
+    "price": 50.05
+  },
+  {
+    "name": "Coxinha",
+    "category": "Mercearia",
+    "price": 2.54
+  },
+  {
+    "name": "Esfirra",
+    "category": "Mercearia",
+    "price": 4.55
+  },
+  {
+    "name": "Americano",
+    "category": "Mercearia",
+    "price": 5.56
+  },
+  {
+    "name": "Cachorro quente",
+    "category": "Mercearia",
+    "price": 3.59
+  },
+  {
+    "name": "Brigadeiro",
+    "category": "Mercearia",
+    "price": 50.06
+  },
+  {
+    "name": "Pão de queijo",
+    "category": "Mercearia",
+    "price": 2.55
+  },
+  {
+    "name": "Torta de frango com palmito",
+    "category": "Mercearia",
+    "price": 35.07
+  },
+  {
+    "name": "Arroz 1kg",
+    "category": "Mercearia",
+    "price": 5.99
+  },
+  {
+    "name": "Feijão 1kg",
+    "category": "Mercearia",
+    "price": 5.69
+  },
+  {
+    "name": "Sal 1kg",
+    "category": "Mercearia",
+    "price": 1.99
+  },
+  {
+    "name": "Açúcar 1kg",
+    "category": "Mercearia",
+    "price": 5.99
+  },
+  {
+    "name": "Óleo de girassol 900ml",
+    "category": "Mercearia",
+    "price": 8.99
+  },
+  {
+    "name": "Farinha de trigo 1kg",
+    "category": "Mercearia",
+    "price": 2.99
+  },
+  {
+    "name": "Café Solúvel 500g",
+    "category": "Mercearia",
+    "price": 15.99
+  },
+  {
+    "name": "Biscoito recheado chocolate",
+    "category": "Mercearia",
+    "price": 2.99
+  },
+  {
+    "name": "Biscoito wafer morango",
+    "category": "Mercearia",
+    "price": 1.99
+  },
+  {
+    "name": "Doritos",
+    "category": "Mercearia",
+    "price": 5.99
+  },
+  {
+    "name": "Fandangos",
+    "category": "Mercearia",
+    "price": 4.99
+  },
+  {
+    "name": "Cookies de chocolate",
+    "category": "Mercearia",
+    "price": 7.99
+  },
+  {
+    "name": "Geleia de morango",
+    "category": "Mercearia",
+    "price": 9.99
+  },
+  {
+    "name": "Massa para tapioca",
+    "category": "Mercearia",
+    "price": 5.99
+  },
+  {
+    "name": "Ketchup",
+    "category": "Mercearia",
+    "price": 8.99
+  },
+  {
+    "name": "Azeite 500ml",
+    "category": "Mercearia",
+    "price": 12.99
+  },
+  {
+    "name": "Maionese",
+    "category": "Mercearia",
+    "price": 10.99
+  },
+  {
+    "name": "Chocolate ao leite 110g",
+    "category": "Mercearia",
+    "price": 4.99
+  },
+  {
+    "name": "Chocolate 70% cacau 110g",
+    "category": "Mercearia",
+    "price": 8.99
+  },
+  {
+    "name": "Chocolate branco 110g",
+    "category": "Mercearia",
+    "price": 4.99
+  },
+  {
+    "name": "Sanduiche natural",
+    "category": "Mercearia",
+    "price": 4.58
+  },
+  {
+    "name": "Paleta Bovia Bife",
+    "category": "Carnes",
+    "price": 17.99
+  },
+  {
+    "name": "Coxão mole",
+    "category": "Carnes",
+    "price": 21.99
+  },
+  {
+    "name": "Carne moída",
+    "category": "Carnes",
+    "price": 17.49
+  },
+  {
+    "name": "Contra filé peça",
+    "category": "Carnes",
+    "price": 19.99
+  },
+  {
+    "name": "Costela Bovina",
+    "category": "Carnes",
+    "price": 32.97
+  },
+  {
+    "name": "Músculo peça",
+    "category": "Carnes",
+    "price": 19.99
+  },
+  {
+    "name": "Acém peça",
+    "category": "Carnes",
+    "price": 17.49
+  },
+  {
+    "name": "Peito bovino peça",
+    "category": "Carnes",
+    "price": 18.49
+  },
+  {
+    "name": "Alcatra",
+    "category": "Carnes",
+    "price": 22.99
+  },
+  {
+    "name": "Filé mignon",
+    "category": "Carnes",
+    "price": 39.99
+  },
+  {
+    "name": "Patinho",
+    "category": "Carnes",
+    "price": 21.99
+  },
+  {
+    "name": "Coxão duro",
+    "category": "Carnes",
+    "price": 20.99
+  },
+  {
+    "name": "Maminha",
+    "category": "Carnes",
+    "price": 47.68
+  },
+  {
+    "name": "Frango inteiro",
+    "category": "Carnes",
+    "price": 34.63
+  },
+  {
+    "name": "Fraldinha",
+    "category": "Carnes",
+    "price": 60.89
+  },
+  {
+    "name": "Picanha",
+    "category": "Carnes",
+    "price": 74.97
+  },
+  {
+    "name": "Capa de contra filé",
+    "category": "Carnes",
+    "price": 50.97
+  },
+  {
+    "name": "Coxa e sobrecoxa de frango",
+    "category": "Carnes",
+    "price": 9.98
+  },
+  {
+    "name": "Linguiça",
+    "category": "Carnes",
+    "price": 10.79
+  },
+  {
+    "name": "Frango a passarinho",
+    "category": "Carnes",
+    "price": 9.98
+  },
+  {
+    "name": "Filé de peito de frango",
+    "category": "Carnes",
+    "price": 26.98
+  },
+  {
+    "name": "Coxinha da asa de frango",
+    "category": "Carnes",
+    "price": 17.79
+  },
+  {
+    "name": "Filé de tilápia",
+    "category": "Carnes",
+    "price": 37.98
+  },
+  {
+    "name": "Peru",
+    "category": "Carnes",
+    "price": 73.98
+  },
+  {
+    "name": "Milho em conserva",
+    "category": "Enlatados",
+    "price": 2.99
+  },
+  {
+    "name": "Ervilha em conserva",
+    "category": "Enlatados",
+    "price": 2.99
+  },
+  {
+    "name": "Palmito",
+    "category": "Enlatados",
+    "price": 10.99
+  },
+  {
+    "name": "Sardinha em lata",
+    "category": "Enlatados",
+    "price": 4.75
+  },
+  {
+    "name": "Atum em lata",
+    "category": "Enlatados",
+    "price": 6.99
+  },
+  {
+    "name": "Champignon",
+    "category": "Enlatados",
+    "price": 6.99
+  },
+  {
+    "name": "Seleta de legumes em lata",
+    "category": "Enlatados",
+    "price": 2.99
+  },
+  {
+    "name": "Azeitona",
+    "category": "Enlatados",
+    "price": 7.99
+  },
+  {
+    "name": "Feijão em lata",
+    "category": "Enlatados",
+    "price": 4.99
+  },
+  {
+    "name": "Salsicha em conserva",
+    "category": "Enlatados",
+    "price": 7.99
+  },
+  {
+    "name": "Alcaparras",
+    "category": "Enlatados",
+    "price": 7.99
+  },
+  {
+    "name": "Leite em pó",
+    "category": "Laticínios",
+    "price": 15.58
+  },
+  {
+    "name": "Creme de leite",
+    "category": "Laticínios",
+    "price": 2.17
+  },
+  {
+    "name": "Leite condensado",
+    "category": "Laticínios",
+    "price": 3.99
+  },
+  {
+    "name": "Leite desnatado",
+    "category": "Laticínios",
+    "price": 2.59
+  },
+  {
+    "name": "Leite integral",
+    "category": "Laticínios",
+    "price": 3.58
+  },
+  {
+    "name": "Requeijão",
+    "category": "Laticínios",
+    "price": 5.99
+  },
+  {
+    "name": "Manteiga",
+    "category": "Laticínios",
+    "price": 10.55
+  },
+  {
+    "name": "Margarina",
+    "category": "Laticínios",
+    "price": 4.59
+  },
+  {
+    "name": "Queijo mussarela",
+    "category": "Laticínios",
+    "price": 36.28
+  },
+  {
+    "name": "Queijo parmesão ralado",
+    "category": "Laticínios",
+    "price": 4.57
+  },
+  {
+    "name": "Queijo gorgonzola",
+    "category": "Laticínios",
+    "price": 50.99
+  },
+  {
+    "name": "Iogurte natural",
+    "category": "Laticínios",
+    "price": 6.58
+  },
+  {
+    "name": "Iogurte de morango",
+    "category": "Laticínios",
+    "price": 4.55
+  },
+  {
+    "name": "Leite fermentado",
+    "category": "Laticínios",
+    "price": 1.26
+  },
+  {
+    "name": "Cerveja Skol lata 350ml",
+    "category": "Bebidas",
+    "price": 2.49
+  },
+  {
+    "name": "Cerveja Skol latão 473ml",
+    "category": "Bebidas",
+    "price": 3.49
+  },
+  {
+    "name": "Cerveja Brahma lata 350ml",
+    "category": "Bebidas",
+    "price": 2.79
+  },
+  {
+    "name": "Cerveja Brahma latão 473ml",
+    "category": "Bebidas",
+    "price": 3.99
+  },
+  {
+    "name": "Cerveja Antártica lata 350ml",
+    "category": "Bebidas",
+    "price": 2.59
+  },
+  {
+    "name": "Cerveja Antártica latão 473ml",
+    "category": "Bebidas",
+    "price": 3.79
+  },
+  {
+    "name": "Cerveja Stella Artois lata 310ml",
+    "category": "Bebidas",
+    "price": 2.99
+  },
+  {
+    "name": "Cerveja Heineken lata 350ml",
+    "category": "Bebidas",
+    "price": 3.99
+  },
+  {
+    "name": "Cerveja Heineken latão 473ml",
+    "category": "Bebidas",
+    "price": 4.39
+  },
+  {
+    "name": "Cerveja Amstel lata 350ml",
+    "category": "Bebidas",
+    "price": 2.99
+  },
+  {
+    "name": "Cerveja Eisenbahn lata 350ml",
+    "category": "Bebidas",
+    "price": 3.99
+  },
+  {
+    "name": "Cerveja Baden Witbier lata 350",
+    "category": "Bebidas",
+    "price": 4.69
+  },
+  {
+    "name": "Cerveja Baden Ipa lata 350ml",
+    "category": "Bebidas",
+    "price": 4.69
+  },
+  {
+    "name": "Coca-Cola 2l",
+    "category": "Bebidas",
+    "price": 6.99
+  },
+  {
+    "name": "Guaraná Antártica 2l",
+    "category": "Bebidas",
+    "price": 5.99
+  },
+  {
+    "name": "Fanta laranja 2l",
+    "category": "Bebidas",
+    "price": 4.99
+  },
+  {
+    "name": "Fanta uva 2l",
+    "category": "Bebidas",
+    "price": 4.99
+  },
+  {
+    "name": "Kuat",
+    "category": "Bebidas",
+    "price": 2.99
+  },
+  {
+    "name": "Mate Leão 1,5l",
+    "category": "Bebidas",
+    "price": 3.99
+  },
+  {
+    "name": "Schweppes Citrus 1,5l",
+    "category": "Bebidas",
+    "price": 7.99
+  },
+  {
+    "name": "H2OH Limão 500ml",
+    "category": "Bebidas",
+    "price": 2.99
+  },
+  {
+    "name": "Suco Del Valle sabor uva 1.5l",
+    "category": "Bebidas",
+    "price": 6.99
+  },
+  {
+    "name": "Suco Del Valle sabor laranja 1.5l",
+    "category": "Bebidas",
+    "price": 6.99
+  },
+  {
+    "name": "Água 1,5l",
+    "category": "Bebidas",
+    "price": 1.99
+  },
+  {
+    "name": "Pepsi 2l",
+    "category": "Bebidas",
+    "price": 5.99
+  },
+  {
+    "name": "Sabonete",
+    "category": "Limpeza",
+    "price": 2.89
+  },
+  {
+    "name": "Detergente",
+    "category": "Limpeza",
+    "price": 2.13
+  },
+  {
+    "name": "Sabão em pó",
+    "category": "Limpeza",
+    "price": 9.99
+  },
+  {
+    "name": "Escova de dente",
+    "category": "Limpeza",
+    "price": 3.55
+  },
+  {
+    "name": "Desinfetante",
+    "category": "Limpeza",
+    "price": 5.59
+  },
+  {
+    "name": "Desengordurante",
+    "category": "Limpeza",
+    "price": 3.58
+  },
+  {
+    "name": "Amaciante",
+    "category": "Limpeza",
+    "price": 4.57
+  },
+  {
+    "name": "Desodorante",
+    "category": "Limpeza",
+    "price": 10.54
+  },
+  {
+    "name": "Shampoo",
+    "category": "Limpeza",
+    "price": 15.55
+  },
+  {
+    "name": "Cotonete",
+    "category": "Limpeza",
+    "price": 4.56
+  },
+  {
+    "name": "Vassoura",
+    "category": "Limpeza",
+    "price": 4.59
+  }
+]

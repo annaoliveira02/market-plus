@@ -7,6 +7,7 @@ from app.exceptions.exceptions import (
     ProductAlreadyExistsError,
 )
 from app.models.products_models import Products
+from app.models.stores_models import Stores
 from app.models.user_models import Users
 from flask_jwt_extended import jwt_required
 from app.models.products_store_models import ProductsStoreModel
@@ -16,25 +17,41 @@ from email.mime.text import MIMEText
 import smtplib, ssl
 from os import environ
 from dotenv import load_dotenv
+import random
+import os
+from email.message import EmailMessage
 
 load_dotenv()
 email = MIMEMultipart()
 
-def send_email(name, price, new_price, emails):
-    recipients = emails
-    print(recipients)
+EMAIL_ADRESS = os.environ.get("EMAIL_FROM")
+EMAIL_PASSWORD = os.environ.get("PASSWORD")
+
+def to_send_email(name, price, new_price, emails):
+    msg = EmailMessage()
     upper_name = name.upper()
-    password = environ.get("PASSWORD")
-    email["From"] = environ.get("EMAIL_FROM")
-    email["To"] = ", ".join(recipients) # E-MAIL QUE RECEBE
-    email["Subject"] = "ALERTA DE PROMOÇÃO!" # ASSUNTO DO E-MAIL
-    message = f"O produto {upper_name} que estava pelo preço de <b>R${price}</b> entrou em <b>promoção!</b> Agora está pelo preço de <b>R${new_price}!</b>"
-    
-    email.attach(MIMEText(message, "html"))
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL("smtp.gmail.com", port=465, context=context) as server:
-        server.login(email["From"], password)
-        server.sendmail(email["From"], recipients, email.as_string())
+    recipients = emails
+    msg["Subject"] = "ALERTA DE PROMOÇÃO! 🚨"
+    msg["From"] = EMAIL_ADRESS
+    msg["To"] = ", ".join(recipients)
+
+    msg.set_content(f"""
+                <div style="background-color:#67982e;padding:10px 20px;color:#ffffff">
+                    <h2>Market+ informa: <span style="color:#540c7d">promoção à vista!</span></h2>
+                </div>
+                <div style="padding:20px 0px;text-align:center">
+                    <div>
+                        <h3 style="font-size: 18px">NOVOS PREÇOS CHEGARAM ÀS LOJAS!</h3>
+                        <p style="margin: 0 15rem">O produto <span style="font-size:15px"><b>{upper_name}</b></span> que estava pelo preço de <b>R${price}</b> entrou em <b>promoção!</b> Agora está pelo preço de  <span style="font-size:20px; color:#cc3737"><b>R${new_price}!</b></span></p>
+                    </div>
+                </div>
+            </body>
+        </html>
+    """, subtype='html')
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(EMAIL_ADRESS, EMAIL_PASSWORD)
+        smtp.send_message(msg)
 
 
 @jwt_required()
@@ -104,6 +121,33 @@ def get_all():
         200,
     )
 
+def get_by_id(id):
+    current = Products.query.get(id)
+    try:
+        Products.validate_id(current)
+    except NotFoundError as e:
+        return e.message, 404
+
+    return (jsonify(
+                {
+                    "id": current.id,
+                    "name": current.name,
+                    "category": current.category,
+                    "price": current.price,
+                    "stores": [
+                        {
+                            "store_id": store.id,
+                            "name": store.name,
+                            "address": store.address,
+                            "phone_number": store.phone_number,
+                        }
+                        for store in current.stores
+                    ],
+                }
+        ),
+        200,
+    )
+
 
 @jwt_required()
 def change_products(id):
@@ -120,8 +164,9 @@ def change_products(id):
         if 'cnpj' not in current_store:
             return {'alerta':'Usuário não autorizado para alterar produto'}, 401
         
-        product_name = product.name
-        product_price = relation.price_by_store
+        print(relation)
+        name = product.name
+        price = relation.price_by_store
         users = []
         emails = []
         new_price = data["price"]
@@ -133,8 +178,9 @@ def change_products(id):
         for user in users:
             emails.append(user.email)
         
-        if new_price < product_price:
-            send_email(product_name, product_price, new_price, emails)
+        if new_price < price:
+            #send_email(name, price, new_price, emails)
+            to_send_email(name, price, new_price, emails)
 
         setattr(relation, 'price_by_store', data['price'])
 
@@ -157,8 +203,6 @@ def change_products(id):
         return {"alerta": "Preço deve ser em formato float."}, 400
 
 
-
-
 @jwt_required()
 def delete_products(id):
     current = Products.query.get(id)
@@ -169,16 +213,6 @@ def delete_products(id):
     current_app.db.session.delete(current)
     current_app.db.session.commit()
     return "", 204
-
-
-def get_by_id(id):
-    current = Products.query.get(id)
-    try:
-        Products.validate_id(current)
-    except NotFoundError as e:
-        return e.message, 404
-
-    return jsonify(current)
 
 
 def get_category():
@@ -242,7 +276,18 @@ def add_to_store(id):
     except InvalidTypeError:
         return {"alerta": "Preço deve ser em formato float."}, 400
 
+def patching_products_price():
+    all_products = ProductsStoreModel.query.all()
 
-        
-    
-    
+    for product in all_products:
+        new_price=float(random.randrange(int(product.price_by_store) + 1, int(product.price_by_store) + 2, 1))
+        setattr(product, 'price_by_store', new_price)
+        current_app.db.session.add(product)
+        current_app.db.session.commit()
+    return {"alerta": "mexemo no preço"}
+
+
+def get_price_by_store():
+    all_products = ProductsStoreModel.query.all()
+
+    return jsonify(all_products), 200

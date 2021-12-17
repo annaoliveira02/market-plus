@@ -1,10 +1,58 @@
 [
-    {
-    "name": "Andreea Aanei",
-    "city": "F",
+  {
+    "name": "Gabriela Rodrigues",
+    "city": "Apucarana",
     "state": "PR",
-    "country": "Brazil",
-    "email": "gabriela@email.com",
-    "password": "1234"
-    }
+    "email": "gabrielarodrigues432@gmail.com",
+    "password": "12345678"
+  },
+  {
+    "name": "Lucas Brasil",
+    "city": "Maricá",
+    "state": "RJ",
+    "email": "lucas@email.com",
+    "password": "12345678"
+  },
+  {
+    "name": "Kaio Iwakiri",
+    "city": "Brasília",
+    "state": "DF",
+    "email": "kaio@email.com",
+    "password": "12345678"
+  },
+  {
+    "name": "Anna Louise",
+    "city": "Eusébio",
+    "state": "CE",
+    "email": "anna@email.com",
+    "password": "12345678"
+  },
+  {
+    "name": "Maikol Moraes",
+    "city": "Belém",
+    "state": "PA",
+    "email": "maikol@email.com",
+    "password": "12345678"
+  },
+  {
+    "name": "John Doe",
+    "city": "São Paulo",
+    "state": "SP",
+    "email": "john@email.com",
+    "password": "12345678"
+  },
+  {
+    "name": "Maria Silva",
+    "city": "São Paulo",
+    "state": "SP",
+    "email": "maria@email.com",
+    "password": "12345678"
+  },
+  {
+    "name": "Alexandre Alves",
+    "city": "Curitiba",
+    "state": "PR",
+    "email": "alexandre@email.com",
+    "password": "12345678"
+  }
 ]
