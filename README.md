@@ -2,17 +2,22 @@
 
 A [Market+](https://capstone-api-q3.herokuapp.com/) tem como intuito ajudar a comunidade onde poderá pesquisar os produtos em nosso banco de dados, e atualizar os preços de acordo com os supermercados, ranqueando estes de acordo com o menor preço registrado. 
 
+## Instalação/Utilização
+Para ter acesso à estrutura da API, faça o fork e depois clone este projeto. Não esqueça de criar um database local. Inicie o venv, siga o example do arquivo `.env` e instale as dependências do projeto com `pip install -r requirements.txt`. 
+
+Para acessar os endpoints pelo Insomnia/Postman, use a URL base:
+`https://capstone-api-q3.herokuapp.com/`
+
 
 ## Métodos
 Requisições para a API devem seguir os padrões:
+
 | Método | Descrição |
 |---|---|
 | `GET` | Retorna informações de um ou mais registros. |
 | `POST` | Utilizado para criar um novo registro. |
 | `PATCH` | Atualiza dados de um registro ou altera sua situação. |
 | `DELETE` | Remove um registro do sistema. |
-
-
 
 <h3 align='center'> Cadastro de usuário</h3>
 
@@ -23,10 +28,8 @@ Requisições para a API devem seguir os padrões:
 	"name": "Gabriela",
 	"city": "Apucarana",
 	"state":"PR",
-	"country": "Brasil", 
 	"email": "gabriela@email.com",
-	"password": "1234"
-	
+	"password": "12345678"
 }
 
 ```
@@ -51,7 +54,7 @@ Caso dê tudo certo, a resposta será assim:
 ```json
 {
 	"email": "gabrielas@email.com",
-	"password": "1234"
+	"password": "12345678"
 }
 ```
 
@@ -75,8 +78,8 @@ Caso dê tudo certo, a resposta será assim:
 [
   {
     "id": 1,
-    "name": "kaio",
-    "city": "brasília",
+    "name": "Kaio",
+    "city": "Brasília",
     "state": "DF",
     "country": "Brasil",
     "email": "kaio@email.com",
@@ -91,7 +94,6 @@ Caso dê tudo certo, a resposta será assim:
 ```json
 {
   "name": "Gabriela Rodrigues"
-  
 }
 ```
 
@@ -240,7 +242,7 @@ Caso dê tudo certo a resposta será assim:
 	"state": "PR",
 	"phone_number":"996173170",
 	"cnpj": "11111111111111"
-}
+  }
 ]
 ```
 <h3 align='center'> Deletar mercado</h3>
@@ -262,7 +264,6 @@ Caso dê tudo certo a resposta será assim:
 	"product_img": "image.png",
 	"price": 9.80
 }
-
 ```
 
 Caso dê tudo certo, a resposta será assim:
@@ -279,6 +280,7 @@ Caso dê tudo certo, a resposta será assim:
 ```
 
 <h3 align='center'> Buscar todos os produtos</h3>
+
 `GET /products -  FORMATO DA REQUISIÇÃO- 201`
 
 Caso dê tudo certo a resposta será assim:
@@ -378,7 +380,100 @@ Caso dê tudo certo a resposta será assim:
 ```json
 {
 	"type": "produto de limpeza",
-	"message": "valor não está atualizado"
-	
+	"message": "valor não está atualizado"	
 }
 ```
+
+
+
+## Principais erros
+### ProductAlreadyExistsError
+Ao tentar cadastrar um produto com um nome já existente.
+
+`FORMATO DA RESPOSTA - STATUS 409`
+```json
+{
+	"alerta": "Produto já cadastrado!"
+}
+```
+
+### EmailAlreadyExistsError
+Ao tentar cadastrar um usuário cujo e-mail já foi cadastrado.
+
+`FORMATO DA RESPOSTA - STATUS 409`
+```json
+{
+	"alerta": "E-mail já cadastrado!"
+}
+```
+
+### InvalidKeyError
+Ao realizar qualquer requisição POST com campos faltando ou excedendo os necessários. Abaixo, exemplo de retorno para requisição POST para /products feita errada.
+
+`FORMATO DA RESPOSTA - STATUS 409`
+```json
+{
+	"alert": "Chave inválida! Deve conter somente as chaves: 'name', 'category' e 'price'."
+}
+```
+
+### InvalidTypeError
+Ao realizar qualquer requisição POST cujos campos contém informações em formatos diferentes do esperado. Abaixo, exemplo de retorno para requisição POST para /products feita errada.
+
+`FORMATO DA RESPOSTA - STATUS 409`
+```json
+{
+	"alert": "'name', 'category', devem ser do tipo 'str' e 'price' deve ser do tipo 'float'"
+}
+```
+
+### NotFoundError
+Ao realizar qualquer requisição que requer um parâmetro (por exemplo, o id) na rota. Abaixo, exemplo de retorno para requisição DELETE para /products/54 feita errada.
+
+`FORMATO DA RESPOSTA - STATUS 409`
+```json
+{
+	"alerta": "Nenhum produto encontrada"
+}
+```
+
+### StoreAlreadyExistsError
+
+Ao realizar POST no /stores com um CNPJ já cadastrado.
+
+`FORMATO DA RESPOSTA 409`
+
+```json
+{
+	"alerta": "Loja já cadastrada!"
+}
+```
+
+### UniqueUserError
+
+Ao realizar POST no /register com um e-mail já cadastrado.
+
+`FORMATO DA RESPOSTA 409`
+
+```json
+{
+	"alerta": "E-mail já cadastrado."
+}
+```
+
+## Termos de uso
+
+Esta API é de acesso público, e está disponível por meio do link: `https://capstone-api-q3.herokuapp.com/`. Trata-se de uma API para fins educativos, não devendo ser utilizada para fins comerciais. Ao utilizar a API, devem ser dados os devidos créditos. 
+
+______
+
+Desenvolvido por:
+
+[Anna Oliveira](https://gitlab.com/annaoliveira02) |
+[Gabriela Rodrigues](https://gitlab.com/gaavro) |
+[Lucas Brasil](https://gitlab.com/lucasbrasil) |
+[Kaio Iwakiri](https://gitlab.com/KaioIwakiri) |
+[Maikol Moraes](https://gitlab.com/Maik0l)
+
+@ Kenzie Academy Brasil
+
