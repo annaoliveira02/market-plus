@@ -18,44 +18,41 @@ import smtplib, ssl
 from os import environ
 from dotenv import load_dotenv
 import random
+import os
+from email.message import EmailMessage
 
 load_dotenv()
 email = MIMEMultipart()
 
-def send_email(name, price, new_price, emails):
-    recipients = emails
-    print(recipients)
+EMAIL_ADRESS = os.environ.get("EMAIL_FROM")
+EMAIL_PASSWORD = os.environ.get("PASSWORD")
+
+def to_send_email(name, price, new_price, emails):
+    msg = EmailMessage()
     upper_name = name.upper()
-    password = environ.get("PASSWORD")
-    email["From"] = environ.get("EMAIL_FROM")
-    email["To"] = ", ".join(recipients) # E-MAIL QUE RECEBE
-    email["Subject"] = "ALERTA DE PROMOÇÃO! 🚨" # ASSUNTO DO E-MAIL
-    
-    html = f"""\
-        <html>
-            <body>
+    recipients = emails
+    msg["Subject"] = "ALERTA DE PROMOÇÃO! 🚨"
+    msg["From"] = EMAIL_ADRESS
+    msg["To"] = ", ".join(recipients)
+
+    msg.set_content(f"""
                 <div style="background-color:#67982e;padding:10px 20px;color:#ffffff">
                     <h2>Market+ informa: <span style="color:#540c7d">promoção à vista!</span></h2>
                 </div>
                 <div style="padding:20px 0px;text-align:center">
                     <div>
                         <h3 style="font-size: 18px">NOVOS PREÇOS CHEGARAM ÀS LOJAS!</h3>
-                        <img src="https://dummyimage.com/500x300/000/fff&text=Dummy+image" style="height: 200px;">
                         <p style="margin: 0 15rem">O produto <span style="font-size:15px"><b>{upper_name}</b></span> que estava pelo preço de <b>R${price}</b> entrou em <b>promoção!</b> Agora está pelo preço de  <span style="font-size:20px; color:#cc3737"><b>R${new_price}!</b></span></p>
                     </div>
                 </div>
             </body>
         </html>
-        """
+    """, subtype='html')
 
-    email.attach(MIMEText(html, "html"))
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL("smtp.gmail.com", port=465, context=context) as server:
-        server.login(email["From"], password)
-        server.sendmail(email["From"], recipients, email.as_string())
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(EMAIL_ADRESS, EMAIL_PASSWORD)
+        smtp.send_message(msg)
 
-    html = ""
-    recipients = []
 
 @jwt_required()
 def register_products():
@@ -167,6 +164,7 @@ def change_products(id):
         if 'cnpj' not in current_store:
             return {'alerta':'Usuário não autorizado para alterar produto'}, 401
         
+        print(relation)
         name = product.name
         price = relation.price_by_store
         users = []
@@ -181,7 +179,8 @@ def change_products(id):
             emails.append(user.email)
         
         if new_price < price:
-            send_email(name, price, new_price, emails)
+            #send_email(name, price, new_price, emails)
+            to_send_email(name, price, new_price, emails)
 
         setattr(relation, 'price_by_store', data['price'])
 
